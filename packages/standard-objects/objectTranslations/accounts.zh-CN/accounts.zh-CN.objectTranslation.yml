@@ -1,0 +1,350 @@
+name: accounts
+label: business partner
+description: 
+fields:
+  name:
+    label: Business partner name
+    help: 
+    description: 
+  owner:
+    label: Our account manager
+    help: 
+    description: 
+  is_supplier:
+    label: supplier
+    help: 
+    description: 
+  is_customer:
+    label: client
+    help: 
+    description: 
+  type:
+    label: type
+    help: 
+    options:
+      - label: analyst
+        value: Analyst
+      - label: competitor
+        value: Competitor
+      - label: customer
+        value: Customer
+      - label: Integrators
+        value: Integrator
+      - label: investor
+        value: Investor
+      - label: Partner
+        value: Partner
+      - label: PR media
+        value: Press
+      - label: potential
+        value: Prospect
+      - label: agent
+        value: Reseller
+      - label: other
+        value: Other
+    description: 
+  parent_id:
+    label: parent company
+    help: A parent company that is a subsidiary of a larger company or organization. The parent business partner name must be an existing business partner name in Huayan Cube. You can enter a business partner name or use the find icon to select (or create) a business partner name.
+    description: 
+  credit_code:
+    label: Taxpayer identification number (ID card/other)
+    help: 
+    description: 
+  website:
+    label: website
+    help: 
+    description: 
+  phone:
+    label: Telephone
+    help: 
+    description: 
+  fax:
+    label: fax
+    help: 
+    description: 
+  description:
+    label: describe
+    help: 
+    description: 
+  industry:
+    label: industry
+    help: 
+    options:
+      - label: agriculture
+        value: Agriculture
+      - label: apparel
+        value: Apparel
+      - label: bank
+        value: Banking
+      - label: Biological Technology
+        value: Biotechnology
+      - label: Chemical industry
+        value: Chemicals
+      - label: communication
+        value: Communications
+      - label: architecture
+        value: Construction
+      - label: consult
+        value: Consulting
+      - label: educate
+        value: Education
+      - label: electronic
+        value: Electronics
+      - label: energy
+        value: Energy
+      - label: project
+        value: Engineering
+      - label: entertainment
+        value: Entertainment
+      - label: Environmental friendly
+        value: Environmental
+      - label: finance
+        value: Finance
+      - label: food and drink
+        value: Food_&_Beverage
+      - label: government organization
+        value: Government
+      - label: medical insurance
+        value: Healthcare
+      - label: Serve
+        value: Hospitality
+      - label: Insurance
+        value: Insurance
+      - label: mechanical
+        value: Machinery
+      - label: manufacture
+        value: Manufacturing
+      - label: media
+        value: Media
+      - label: non-profit organization
+        value: Not_For_Profit
+      - label: other
+        value: Other
+      - label: Leisure
+        value: Recreation
+      - label: retail
+        value: Retail
+      - label: Shipping
+        value: Shipping
+      - label: science and technology
+        value: Technology
+      - label: telecommunications
+        value: Telecommunications
+      - label: Transportation
+        value: Transportation
+      - label: Utilities
+        value: Utilities
+    description: 
+  number_of_employees:
+    label: Number of employees
+    help: 
+    description: 
+  state:
+    label: area
+    help: The region to which the business partner is assigned.
+    options:
+      - label: Beijing
+        value: BJ
+      - label: Shanghai
+        value: SH
+      - label: Chongqing
+    description: 
+  billing_address:
+    label: Billing address
+    help: 
+    description: 
+  shipping_address:
+    label: delivery address
+    help: 
+    description: 
+  account_number:
+    label: business partner number
+    help: 
+    description: 
+  rating:
+    label: Grading
+    help: How you classify this business partner's level, for example, Normal, Important.
+    options:
+      - label: Very important
+        value: Hot
+      - label: important
+        value: Warm
+      - label: usually
+        value: Cold
+    description: 
+  invoice_address:
+    label: Billing address
+    help: 
+    description: 
+  invoice_phone:
+    label: Invoicing phone number
+    help: 
+    description: 
+  invoice_bank:
+    label: Account opening bank
+    help: 
+    description: 
+  invoice_combinenum:
+    label: account
+    help: 
+    description: 
+  account_source:
+    label: Business Partner Source
+    help: 
+    description: 
+  site:
+    label: business partner location
+    help: You can use the Business Partner Location field to specify different locations within the same company. For example, let's say Baidu has offices in Beijing and Shanghai. Create two business partners named Baidu, but the values ​​of the business partner locations are Beijing and Shanghai respectively.
+    description: 
+  annual_revenue:
+    label: Annual income
+    help: 
+    description: 
+  ownership:
+    label: ownership
+    help: The ownership of a company, for example, public or private.
+    options:
+      - label: State-owned
+        value: National
+      - label: private
+        value: Private
+      - label: Subsidiaries
+        value: Subcompany
+      - label: other
+        value: Others
+    description: 
+  account_division:
+    label: Business Partner Division
+    help: 
+    description: 
+  partner_account:
+    label: Partner
+    help: 
+    description: 
+  assistant:
+    label: assistant
+    help: 
+    description: 
+  asst_phone:
+    label: Assistant phone number
+    help: 
+    description: 
+  birthdate:
+    label: Birthday
+    help: 
+    description: 
+  department:
+    label: department
+    help: 
+    description: 
+  email:
+    label: e-mail
+    help: 
+    description: 
+  do_not_call:
+    label: Do not call
+    help: Do you want to contact the contact by phone.
+    description: 
+  has_opted_out_of_email:
+    label: Exit mailing list
+    help: Whether to include the contact in the bulk mailing list.
+    description: 
+  fax_opt_out:
+    label: Exit fax list
+    help: Whether to include contacts in faxes.
+    description: 
+  home_phone:
+    label: home phone
+    help: 
+    description: 
+  lead_source:
+    label: Sources of potential business partners
+    help: Sources of potential business partners, such as advertising, partners, or the web.
+    options:
+      - label: advertise
+        value: Advertisement
+      - label: business partner activities
+        value: Customer_Event
+      - label: Employee recommendations
+        value: Employee_Referral
+      - label: Baidu search
+        value: Baidu_AdWords
+      - label: other
+        value: Other
+      - label: Partner
+        value: Partner
+      - label: Purchasing List
+        value: Purchased_List
+      - label: trade show
+        value: Trade_Show
+      - label: Online seminar
+        value: Webinar
+      - label: website
+        value: Website
+    description: 
+  mailing_city:
+    label: Mailing Address-City
+    help: 
+    description: 
+  mailing_street:
+    label: Mailing address-street
+    help: 
+    description: 
+  mailing_zip:
+    label: Mailing address - postal code
+    help: 
+    description: 
+  other_city:
+    label: Other Address-City
+    help: 
+    description: 
+  other_street:
+    label: Other Address-Street
+    help: 
+    description: 
+  other_zip:
+    label: Other address - postal code
+    help: 
+    description: 
+  mobile:
+    label: cell phone
+    help: 
+    description: 
+  salutation:
+    label: gender
+    help: 
+    options:
+      - label: male
+        value: Male
+      - label: female
+        value: Female
+    description: 
+  other_phone:
+    label: Other phone numbers
+    help: 
+    description: 
+groups:
+  Address information: Address information
+  Billing Information: Billing Information
+  Other address information: Other address information
+listviews:
+  recent:
+    label: Recently viewed
+  all:
+    label: All business partners
+  # allCustomers:
+  #   label: all customers
+  hotRating:
+    label: very important business partner
+  mine:
+    label: my business partner
+actions:
+  enableSupplier:
+    label: Enable as a vendor
+  disableSupplier:
+    label: Disable vendor account
+  enableCustomer:
+    label: Enable as business partner
+  disableCustomer:
+    label: Disable business partner account

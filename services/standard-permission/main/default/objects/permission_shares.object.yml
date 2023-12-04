@@ -1,0 +1,63 @@
+name: permission_shares
+label: Permission Share
+icon: assigned_resource
+hidden: true
+fields:
+  name:
+    label: Name
+    type: text
+    required: true
+    searchable: true
+    index: true
+  object_name:
+    label: Object
+    type: lookup
+    multiple: true
+    optionsFunction: !<tag:yaml.org,2002:js/function> |- 
+      function () {
+        return Steedos.getObjectsOptions(function(o){
+          return o.enable_share
+        })
+      }
+    required: true
+    filterable: true
+  filters:
+    label: Filters
+    type: textarea
+    inlineHelpText: Format of OData Filters Required.
+    is_wide: true
+  organizations:
+    label: Departments
+    type: lookup
+    reference_to: organizations
+    multiple: true
+    defaultValue: []
+    filterable: true
+  users:
+    label: Users
+    type: lookup
+    reference_to: users
+    multiple: true
+    defaultValue: []
+    filterable: true
+list_views:
+  all:
+    label: All
+    filter_scope: space
+    columns:
+      - name
+permission_set:
+  user:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true

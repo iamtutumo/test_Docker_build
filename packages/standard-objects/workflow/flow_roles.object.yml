@@ -1,0 +1,63 @@
+name: flow_roles
+icon: queue
+label: Workflow Role
+hidden: true
+version: 2
+fields:
+  name:
+    type: text
+    label: Name
+    name: name
+    searchable: true
+  api_name:
+    type: text
+    label: API Name
+    required: true
+    searchable: true
+    name: api_name
+  # company_id:
+  #   required: false
+  #   omit: false
+  #   hidden: false
+list_views:
+  all:
+    filter_scope: space
+    columns:
+      - name
+      - modified
+    filter_fields:
+      - company_id
+    label: All Workflow Roles
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true
+  workflow_admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+    modifyCompanyRecords: true
+    viewCompanyRecords: true
+    disabled_list_views: []
+    disabled_actions: []
+    unreadable_fields: []
+    uneditable_fields: []
+    unrelated_objects: []
+actions:
+  customize:
+    label: Customize
+    on: record

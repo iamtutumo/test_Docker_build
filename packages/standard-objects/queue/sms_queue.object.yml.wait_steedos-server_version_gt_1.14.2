@@ -1,0 +1,82 @@
+name: _sms_queue
+label: SMS queue
+icon: sms
+fields:
+  sms: 
+    type: object
+    is_wide: true
+  sms.Format:
+    type: select
+    options: 'JSON'
+    hidden: true
+    omit: true
+  sms.Action:
+    type: select
+    options: 'SingleSendSms'
+    hidden: true
+    omit: true
+  sms.ParamString:
+    type: text
+    hidden: true
+    omit: true
+  sms.SignName:
+    type: text
+    hidden: true
+    omit: true
+  sms.TemplateCode:
+    type: text
+    label: Template number
+    hidden: true
+    omit: true
+  sms.RecNum:
+    type: text
+    label: Recipient’s mobile phone number
+    searchable: true
+  sms.msg:
+    type: text
+    label: Message content
+  signname:
+    type: text
+    label: sign
+  sent:
+    type: boolean
+    label: Whether to send
+    defaultValue: false
+    index: true
+  sending:
+    type: number
+    defaultValue: 0
+    index: true
+  sentAt:
+    type: datetime
+    label: Send time
+  space:
+    type: lookup
+    searchable: true
+list_views:
+  all:
+    label: 全部
+    filter_scope: space
+    columns:
+      - sms.RecNum
+      - sms.msg
+      - signname
+      - sent
+      - sending
+      - sentAt
+      - space
+permission_set:
+  user:
+    allowCreate: true
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+  admin:
+    allowCreate: true
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true

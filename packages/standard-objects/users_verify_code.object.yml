@@ -1,0 +1,90 @@
+name: users_verify_code
+label: Verify Code
+icon: password
+hidden: true
+fields:
+  name:
+    label: Name
+    type: text
+    index: true
+  code:
+    label: Verify Code
+    type: text
+    min: 6
+    max: 6
+    required: true
+    index: true
+  action:
+    label: Use for
+    type: select
+    options:
+      - label: Verify Email
+        value: emailVerify
+      - label: Verify Mobile
+        value: mobileVerify
+      - label: Login with Email
+        value: emailLogin
+      - label: Login with Mobile
+        value: mobileLogin
+      - label: Register with Email
+        value: emailSignupAccount
+      - label: Register with Mobile
+        value: mobileSignupAccount
+    required: true
+    index: true
+  owner:
+    label: Owner
+    type: lookup
+    reference_to: users
+    sortable: true
+    filterable: true
+    index: true
+    hidden: false
+    omit: false
+    required: true
+  expiredAt:
+    label: Expiration Time
+    type: datetime
+    readonly: true
+    index: true
+  verifiedAt:
+    label: Verification Time
+    type: datetime
+    index: true
+  failureCount:
+    label: Number of Validation Failures
+    type: number
+list_views:
+  all:
+    label: All 
+    sort: [["expiredAt", "desc"]]
+    columns:
+      - name
+      - code
+      - action
+      - owner
+      - expiredAt
+      - verifiedAt
+      - failureCount
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+  guest:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false

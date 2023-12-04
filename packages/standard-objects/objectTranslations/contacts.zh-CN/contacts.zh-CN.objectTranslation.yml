@@ -1,0 +1,173 @@
+name: contacts
+label: contacts
+description: 
+fields:
+  name:
+    label: Name
+    help: 
+    description: 
+  owner:
+    label: Owner
+    help: 
+    description: 
+  account:
+    label: Business partner
+    help: Business partner associated with the contact
+    description: 
+  reports_to_id:
+    label: Immediate Supervisor
+    help: Related direct supervisor
+    description: 
+  salutation:
+    label: Gender
+    help: 
+    options:
+      - label: Male
+        value: Male
+      - label: Female
+        value: Female
+    description: 
+  title:
+    label: Job
+    help: 
+    description: 
+  department:
+    label: Department
+    help: Related departments
+    description: 
+  email:
+    label: Email
+    help: 
+    description: 
+  fax:
+    label: Fax
+    help: 
+    description: 
+  phone:
+    label: Phone
+    help: 
+    description: 
+  mobile:
+    label: Mobile
+    help: 
+    description: 
+  home_phone:
+    label: Home phone
+    help: 
+    description: 
+  birthdate:
+    label: Birthdate
+    help: 
+    description: 
+  mailing_address:
+    label: Mailing address
+    help: 
+    description: 
+  user:
+    label: User
+    help: 
+    description: 
+  hoddy:
+    label: Hobby
+    help: 
+    description: 
+  description:
+    label: Description
+    help: 
+    description: 
+  last_save_date:
+    label: Last kept in touch save date
+    help: 
+    description: 
+  last_request_date:
+    label: Date of last keep in touch request
+    help: 
+    description: 
+  individual:
+    label: personal
+    help: 
+    description: 
+  other_city:
+    label: Other Address-City
+    help: 
+    description: 
+  other_street:
+    label: Other Address-Street
+    help: 
+    description: 
+  other_zip:
+    label: Other address - postal code
+    help: 
+    description: 
+  other_phone:
+    label: Other phone numbers
+    help: 
+    description: 
+  assistant:
+    label: assistant
+    help: 
+    description: 
+  asst_phone:
+    label: Assistant phone number
+    help: 
+    description: 
+  do_not_call:
+    label: Do not call
+    help: Do you want to contact the contact by phone.
+    description: 
+  has_opted_out_of_email:
+    label: Exit mailing list
+    help: Whether to include the contact in the bulk mailing list.
+    description: 
+  fax_opt_out:
+    label: Exit fax list
+    help: Whether to include contacts in faxes.
+    description: 
+  lead_source:
+    label: Source of potential customers
+    help: Source of leads, such as advertising, partners, or the web.
+    options:
+      - label: advertise
+        value: Advertisement
+      - label: Customer activities
+        value: Customer_Event
+      - label: Employee recommendations
+        value: Employee_Referral
+      - label: Baidu search
+        value: Baidu_AdWords
+      - label: other
+        value: Other
+      - label: Partner
+        value: Partner
+      - label: Purchasing List
+        value: Purchased_List
+      - label: trade show
+        value: Trade_Show
+      - label: Online seminar
+        value: Webinar
+      - label: website
+        value: Website
+    description: 
+groups:
+  Address information: Address information
+  Other address information: Other address information
+listviews:
+  recent:
+    label: Recently viewed contacts
+  all:
+    label: All contacts
+  mine:
+    label: My contacts
+actions:
+  createSupplierSpaceUser:
+    label: Create Supplier SpaceUser
+  viewSupplierSpaceUser:
+    label: View Supplier SpaceUser
+  disableSupplierSpaceUser:
+    label: Disable Supplier SpaceUser
+  createCustomerSpaceUser:
+    label: Create Customer SpaceUser
+  viewCustomerSpaceUser:
+    label: View Customer SpaceUser
+  disableCustomerSpaceUser:
+    label: Disable Customer SpaceUser

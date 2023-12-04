@@ -1,0 +1,309 @@
+name: object_listviews
+label: List View
+icon: forecasts
+version: 2
+fields:
+  label:
+    label: Label
+    type: text
+    is_name: true
+    required: true
+  name:
+    label: API Name
+    type: text
+    searchable: true
+    index: true
+    required: true
+    inlineHelpText: Can only contain lowercase letters and numbers, must start with a letter, cannot end with an underscore character or contain two consecutive underscore characters
+  object_name:
+    label: Object
+    type: master_detail
+    write_requires_master_read: true
+    required: true
+    reference_to: objects
+    reference_to_field: name
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function () {
+              var _options;
+
+              _options = [];
+
+              _.forEach(Creator.objectsByName, function (o, k) {
+                return _options.push({
+                  label: o.label,
+                  value: k,
+                  icon: o.icon
+                });
+              });
+
+              return _options;
+            }
+  filter_scope:
+    label: Filter Scope
+    type: select
+    defaultValue: space
+    required: true
+    options:
+      - label: 我的
+        value: mine
+      - label: 工作区
+        value: space 
+  shared:
+    label: Shared to All Users
+    type: boolean
+  show_count:
+    label: Show Record Count
+    type: boolean
+  type:
+    label: Type
+    type: select
+    options: 
+      - label: Grid
+        value: grid
+      - label: Calendar
+        value: calendar
+    defaultValue: '"grid"'
+    hidden: true
+  scrolling_mode:
+    label: Scrolling Mode
+    inlineHelpText: Define the scroll bar display style for the data list.
+    type: select
+    options: 
+      - label: Standard ( Click the page number to load the data of the corresponding page. )
+        value: standard
+      - label: Virtual ( Switch the page through the scroll bar. When you scroll to the corresponding page, the data will be loaded remotely. )
+        value: virtual
+      - label: Infinite ( Initially, only the first page will be loaded, and the next page will be loaded while scrolling. )
+        value: infinite
+    defaultValue: '"standard"'
+    hidden: true
+  columns:
+    label: Columns
+    type: grid
+    is_wide: true
+    required: true
+  columns.$:
+    label: Column
+    blackbox: true
+    type: object
+  columns.$.field:
+    label: Field
+    type: lookup
+    multiple: false
+    is_wide: false
+    required: true
+    depend_on:
+      - object_name
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              if (!(values != null ? values.object_name : void 0)) {
+                values.object_name = Session.get("object_name");
+              }
+              
+              if(values.object_name && !_.isString(values.object_name)){
+                values.object_name = values.object_name.name
+              }
+
+              return Creator.getObjectFieldOptions(values != null ? values.object_name : void 0, true);
+            }
+  columns.$.width:
+    label: Width
+    type: text
+  # ag-grid配置rowModelType为infinite的话，列的warp属性功能异常，即不会换行显示且显示效果异常 #258
+  # columns.$.wrap:
+  #   label: Wrap
+  #   type: boolean
+  filter_fields:
+    label: Default Filter Fields
+    type: lookup
+    multiple: true
+    is_wide: true
+    depend_on:
+      - object_name
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              if (!(values != null ? values.object_name : void 0)) {
+                values.object_name = Session.get("object_name");
+              }
+              if(values.object_name && !_.isString(values.object_name)){
+                values.object_name = values.object_name.name
+              }
+              return Creator.getObjectFieldOptions(values != null ? values.object_name : void 0);
+            }
+  sort:
+    label: Default Sort Order
+    type: grid
+    is_wide: true
+    depend_on:
+      - object_name
+  sort.$:
+    label: Order
+    blackbox: true
+    type: object
+  sort.$.field_name:
+    label: Field Name
+    type: lookup
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              var _object, _options, fields, icon;
+              if(values.object_name && !_.isString(values.object_name)){
+                values.object_name = values.object_name.name
+              }
+              _options = [];
+              _object = Creator.getObject(values != null ? values.object_name : void 0);
+              fields = Creator.getFields(values != null ? values.object_name : void 0);
+              icon = _object.icon;
+
+              _.forEach(fields, function (f) {
+                var label;
+
+                if (!_object.fields[f].hidden) {
+                  label = _object.fields[f].label;
+                  return _options.push({
+                    label: label || f,
+                    value: f,
+                    icon: icon
+                  });
+                }
+              });
+
+              return _options;
+            }
+  sort.$.order:
+    label: Sort Order
+    type: select
+    defaultValue: asc
+    options:
+      - label: ASC
+        value: asc
+      - label: DESC
+        value: desc
+  filters:
+    label: Filters
+    type: code
+    is_wide: true
+    hidden: false
+    readonly: true
+    visible_on: "{{global.mode ==='read' ? true : false}}"
+    depend_on:
+      - object_name
+  # filters.$:
+  #   label: Filter
+  #   blackbox: true
+  # filters.$.field:
+  #   label: Field
+  #   type: lookup
+  #   showIcon: false
+  #   optionsFunction: !!js/function |
+  #     function(values){
+  #       if(values.object_name){
+  #         return Creator.getObjectFilterFieldOptions(values.object_name)
+  #       }
+  #       return []
+  #     }
+  # filters.$.operation:
+  #   label: Operator
+  #   type: lookup
+  #   showIcon: false
+  #   optionsFunction: !!js/function |
+  #     function(values){
+  #       if(values.object_name){
+  #         if(!this.template){
+  #           let options = Creator.getFieldOperation();
+  #           Creator.pushBetweenBuiltinOptionals('date', options);
+  #           return options;
+  #         }
+          
+  #         const filter = _.find(values.filters, function (item) {
+  #           return item._id === values._grid_row_id
+  #         })
+
+  #         if(filter){
+  #           var field = filter.field;
+  #           if(field){
+  #             var object_fields = Creator.getObject(values.object_name).fields
+  #             var filter_field_type;
+  #             if(object_fields[field]){
+  #               filter_field_type = object_fields[field].type
+  #               return Creator.getFieldOperation(filter_field_type);
+  #             }
+  #           }
+  #         }
+  #       }
+  #       return [];
+  #     }
+  # filters.$.value:
+  #   label: Value
+  #   blackbox: true
+  filter_logic:
+    label: Logic
+    type: text
+    readonly: true
+    hidden: true
+    visible_on: "{{global.mode ==='read' ? true : false}}"
+  mobile_columns:
+    label: Mobile Columns
+    type: grid
+    is_wide: true
+    depend_on:
+      - object_name
+  mobile_columns.$:
+    label: Column
+    blackbox: true
+    type: object
+  mobile_columns.$.field:
+    label: Field
+    type: lookup
+    multiple: false
+    is_wide: false
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              if (!(values != null ? values.object_name : void 0)) {
+                values.object_name = Session.get("object_name");
+              }
+
+              if(values.object_name && !_.isString(values.object_name)){
+                values.object_name = values.object_name.name
+              }
+
+              return Creator.getObjectFieldOptions(values != null ? values.object_name : void 0, true);
+            }
+  sort_no:
+    label: Sort no
+    type: number
+    scale: 0
+    defaultValue: 100
+paging:
+  enabled: false
+list_views:
+  all:
+    columns:
+      - label
+      - name
+      - shared
+      - owner
+      - modified
+    label: All List View
+    filter_scope: space
+actions:
+  customize:
+    label: Customize
+    on: record_only
+  copy:
+    label: 复制 
+    on: record_only
+permission_set:
+  user:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: false
+    modifyAllRecords: true
+    viewAllRecords: true

@@ -1,0 +1,294 @@
+name: instances
+icon: task
+label: Request
+enable_search: true
+fields:
+  name:
+    label: Name
+    type: text
+    defaultValue: ''
+    description: ''
+    inlineHelpText: ''
+    required: true
+    searchable: true
+    is_wide: true
+    name: name
+  flow:
+    label: Workflow
+    type: lookup
+    reference_to: flows
+    readonly: true
+    name: flow
+    filterable: true
+  flow_version:
+    label: Workflow Version
+    type: text
+    hidden: true
+    name: flow_version
+  form:
+    label: Form
+    type: lookup
+    reference_to: forms
+    readonly: true
+    name: form
+    filterable: true
+  form_version:
+    label: Form Version
+    type: text
+    hidden: true
+    name: form_version
+  submitter:
+    label: Submitter
+    type: master_detail
+    reference_to: users
+    readonly: true
+    name: submitter
+    filterable: true
+    write_requires_master_read: true
+  submitter_name:
+    type: text
+    label: Submitter's Name
+    hidden: true
+    name: submitter_name
+  submit_date:
+    type: datetime
+    label: Submit Date
+    name: submit_date
+  applicant:
+    type: lookup
+    label: Applicant
+    reference_to: users
+    name: applicant
+    filterable: true
+  applicant_name:
+    type: text
+    label: Applicant's Name
+    hidden: true
+    name: applicant_name
+  applicant_organization:
+    type: lookup
+    label: Applicant Department
+    reference_to: organizations
+    name: applicant_organization
+    filterable: true
+  applicant_organization_name:
+    type: text
+    label: Applicant Department's Name
+    hidden: true
+    name: applicant_organization_name
+  applicant_organization_fullname:
+    type: text
+    label: Applicant Department's Fullname
+    hidden: true
+    name: applicant_organization_fullname
+  code:
+    label: Code
+    type: text
+    hidden: true
+    name: code
+  values:
+    blackbox: true
+    omit: true
+    label: Field Values
+    hidden: true
+    name: values
+  inbox_users:
+    type: lookup
+    multiple: true
+    reference_to: users
+    label: Inbox Users
+    name: inbox_users
+    filterable: true
+  outbox_users:
+    type: lookup
+    multiple: true
+    reference_to: users
+    label: Outbox Users
+    name: outbox_users
+    filterable: true
+  traces:
+    type: '[Object]'
+    blackbox: true
+    omit: true
+    label: Processing Traces
+    hidden: true
+    name: traces
+  attachments:
+    type: '[Object]'
+    blackbox: true
+    omit: true
+    label: Attachments
+    hidden: true
+    name: attachments
+  flow_name:
+    type: text
+    label: Workflow Name
+    hidden: true
+    name: flow_name
+  category_name:
+    type: text
+    label: Category Name
+    hidden: true
+    name: category_name
+  category:
+    label: Category
+    type: lookup
+    reference_to: categories
+    hidden: true
+    name: category
+    filterable: true
+  state:
+    label: Processing State
+    type: select
+    options:
+      - label: Draft
+        value: draft
+      - label: Pending
+        value: pending
+      - label: Completed
+        value: completed
+    readonly: true
+    name: state
+    filterable: true
+  is_recorded:
+    type: boolean
+    label: Recorded
+    name: is_recorded
+  is_archived:
+    type: boolean
+    label: Archived
+    hidden: true
+    name: is_archived
+  is_deleted:
+    type: boolean
+    label: Deleted
+    hidden: true
+  is_recorded_creator:
+    type: boolean
+    label: Synced
+    name: is_recorded_creator
+  related_instances:
+    type: lookup
+    multiple: true
+    reference_to: instances
+    label: Related Instances
+    is_wide: true
+    name: related_instances
+    filterable: true
+  record_ids:
+    label: Record IDs
+    type: grid
+    omit: true
+    hidden: true
+    name: record_ids
+  record_ids.$.o:
+    type: text
+    hidden: true
+    name: record_ids.$.o
+  record_ids.$.ids:
+    type: '[text]'
+    hidden: true
+    name: record_ids.$.ids
+  # company_id:
+  #   required: false
+  #   omit: false
+  #   hidden: false
+  current_step_name:
+    type: text
+    hidden: true
+  current_step_auto_submit:
+    label: Auto Submit if Time Out
+    type: boolean
+    omit: true
+    hidden: true
+    name: current_step_auto_submit
+  applicant_company:
+    label: Applicant's Division
+    type: lookup
+    reference_to: company
+    name: applicant_company
+list_views:
+  all:
+    label: All
+    filter_scope: space
+    columns:
+      - name
+      - applicant
+      - applicant_organization
+      - modified
+      - state
+  inbox:
+    label: Inbox
+    filter_scope: space
+    filters:
+      - - inbox_users
+        - =
+        - '{userId}'
+  outbox:
+    label: Outbox
+    filter_scope: space
+    filters:
+      - - outbox_users
+        - =
+        - '{userId}'
+  draft:
+    label: Draft
+    filter_scope: space
+    filters:
+      - - submitter
+        - =
+        - '{userId}'
+      - - state
+        - =
+        - 'draft'
+      - - is_hidden
+        - <>
+        - true
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+  admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+  workflow_admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+    modifyCompanyRecords: false
+    viewCompanyRecords: true
+    disabled_list_views:
+      - inbox
+      - outbox
+    disabled_actions: []
+    unreadable_fields: []
+    uneditable_fields: []
+    unrelated_objects: []
+actions:
+  view_instance:
+    label: View Instance
+    visible: true
+    'on': record
+    todo: !<tag:yaml.org,2002:js/function> |-
+      function (object_name, record_id, fields) {
+              var uobj;
+              uobj = {};
+              uobj["box"] = 'monitor';
+              uobj["print_is_show_traces"] = '1';
+              uobj["print_is_show_attachments"] = '1';
+              uobj["X-User-Id"] = Meteor.userId();
+              uobj["X-Auth-Token"] = Accounts._storedLoginToken();
+              var uobjToString = window.$.param(uobj);
+              return Steedos.openWindow(Steedos.absoluteUrl() + "workflow/space/" + Session.get("spaceId") + "/print/" + record_id + "?" + uobjToString, "", 'width=900,height=750,scrollbars=yes,EnableViewPortScale=yes,toolbarposition=top,transitionstyle=fliphorizontal,menubar=yes,closebuttoncaption=  x  ');
+            }

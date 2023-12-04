@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib",
+        "strict": false,
+        "noUnusedLocals": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "declaration": true,
+        "removeComments": true
+    },
+    "include": [
+      "./src/**/*"
+    ]
+  }

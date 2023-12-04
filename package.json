@@ -1,0 +1,32 @@
+{
+  "name": "steedos-platform",
+  "private": true,
+  "workspaces": [
+    "examples/*",
+    "packages/*",
+    "services/*",
+    "ee/*",
+    "server",
+    "steedos-packages/*"
+  ],
+  "scripts": {
+    "pnpm:install": "rm -rf node_modules && pnpm install",
+    "start": "cd examples && cd project-template && steedos start",
+    "start:ee": "cd examples && cd project-ee && steedos start",
+    "bootstrap": "lerna clean --yes && lerna bootstrap --force-local",
+    "build": "yarn bootstrap && lerna run build",
+    "i18n": "lerna run i18n"
+  },
+  "resolutions": {},
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@types/express-serve-static-core": "~4.17.29",
+    "@types/node": "18.0.3",
+    "lerna": "^4.0.0",
+    "nodemon": "^2.0.19",
+    "typescript": "4.6.3"
+  },
+  "dependencies": {
+    "tslib": "^2.4.0"
+  }
+}

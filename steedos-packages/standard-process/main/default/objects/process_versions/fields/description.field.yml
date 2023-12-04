@@ -1,0 +1,5 @@
+name: description
+label: describe
+type: textarea
+sort_no: 80
+readonly: true

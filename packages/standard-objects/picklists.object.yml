@@ -1,0 +1,39 @@
+name: picklists
+label: Picklist
+icon: orders
+hidden: true
+fields:
+  name: 
+    type: text
+    label: Name
+  code:
+    type: text
+    label: Code
+    inlineHelpText: 'Object field options can be overridden in the format of `ObjectName.FieldName` '
+  description:
+    label: Description
+    type: textarea
+    is_wide: true
+list_views:
+  all:
+    label: All Picklists
+    filter_scope: space
+    columns:
+      - name
+      - code
+      - description
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true

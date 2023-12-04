@@ -1,0 +1,5 @@
+name: deploy
+is_enable: true
+label: release
+'on': record
+visible: true

@@ -1,0 +1,4 @@
+name: parameters.$.name
+label: parameter name
+type: text
+sort_no: 10

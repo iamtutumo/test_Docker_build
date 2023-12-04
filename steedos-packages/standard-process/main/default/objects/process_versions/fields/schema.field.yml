@@ -1,0 +1,7 @@
+name: schema
+label: Process definition Schema
+type: code
+language: json
+is_wide: true
+sort_no: 70
+readonly: true

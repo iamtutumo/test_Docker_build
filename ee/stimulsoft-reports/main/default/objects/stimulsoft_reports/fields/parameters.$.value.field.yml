@@ -1,0 +1,5 @@
+name: parameters.$.value
+label: Parameter value
+type: text
+inlineHelpText: Support formula
+sort_no: 20

@@ -1,0 +1,17 @@
+name: core
+label: 
+description: 
+fields: {}
+actions:
+  standard_query:
+    label: Find
+  standard_new:
+    label: New
+  standard_open_view:
+    label: Check
+  standard_edit:
+    label: edit
+  standard_delete:
+    label: delete
+  standard_delete_many:
+    label: delete

@@ -1,0 +1,5 @@
+name: enable
+is_enable: true
+label: enable
+'on': record
+visible: true

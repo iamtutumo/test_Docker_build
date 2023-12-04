@@ -1,0 +1,5 @@
+name: copyInstallationID
+is_enable: true
+label: Copy package ID
+'on': record_only
+visible: true

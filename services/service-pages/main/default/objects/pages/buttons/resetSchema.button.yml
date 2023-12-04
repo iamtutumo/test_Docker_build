@@ -1,0 +1,6 @@
+name: resetSchema
+is_enable: true
+label: 重置
+'on': record_only
+visible: true
+sort: 9999

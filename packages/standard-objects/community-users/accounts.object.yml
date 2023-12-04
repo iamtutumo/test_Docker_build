@@ -1,0 +1,612 @@
+name: accounts
+label: business partner
+icon: account
+enable_files: true
+enable_search: true
+enable_events: true
+enable_tasks: true
+enable_api: true
+enable_share: true
+enable_audit: true
+enable_enhanced_lookup: true
+version: 2
+fields:
+  name:
+    label: Business partner name
+    type: text
+    searchable: true
+    required: true
+    sortable: true
+    index: true
+    name: name
+  owner:
+    label: Our account manager
+    sortable: true
+    omit: false
+    hidden: false
+  is_supplier:
+    type: boolean
+    label: supplier
+    hidden: false
+    omit: false
+  is_customer:
+    type: boolean
+    label: client
+    hidden: false
+    omit: false
+  type:
+    label: type
+    type: select
+    sortable: true
+    options:
+      - label: analyst
+        value: Analyst
+      - label: competitor
+        value: Competitor
+      - label: customer
+        value: Customer
+      - label: Integrators
+        value: Integrator
+      - label: investor
+        value: Investor
+      - label: Partner
+        value: Partner
+      - label: PR media
+        value: Press
+      - label: potential
+        value: Prospect
+      - label: agent
+        value: Reseller
+      - label: other
+        value: Other
+    filterable: true
+  parent_id:
+    type: lookup
+    label: parent company
+    reference_to: accounts
+    inlineHelpText: A parent company that is a subsidiary of a larger company or organization. The parent business partner must be an existing business partner in Huayan Magic Cube. You can enter a business partner name or use the find icon to select (or create) a business partner.
+  credit_code:
+    type: text
+    label: Taxpayer Identification Number（ID card/other）
+    name: credit_code
+    searchable: true
+  website:
+    type: url
+    label: website
+  phone:
+    type: text
+    label: Telephone
+    defaultValue: ''
+  fax:
+    type: text
+    label: fax
+  description:
+    label: describe
+    type: textarea
+    is_wide: true
+    name: description
+  industry:
+    type: select
+    label: industry
+    searchable: true
+    sortable: true
+    options:
+      - label: agriculture
+        value: Agriculture
+      - label: apparel
+        value: Apparel
+      - label: bank
+        value: Banking
+      - label: Biological Technology
+        value: Biotechnology
+      - label: Chemical industry
+        value: Chemicals
+      - label: communication
+        value: Communications 
+      - label: architecture
+        value: Construction
+      - label: consult
+        value: Consulting
+      - label: educate
+        value: Education
+      - label: electronic
+        value: Electronics
+      - label: energy
+        value: Energy
+      - label: project
+        value: Engineering
+      - label: entertainment
+        value: Entertainment
+      - label: Environmental friendly
+        value: Environmental
+      - label: finance
+        value: Finance
+      - label: food and drink
+        value: Food_&_Beverage
+      - label: government organization
+        value: Government
+      - label: medical insurance
+        value: Healthcare
+      - label: Serve
+        value: Hospitality
+      - label: Insurance
+        value: Insurance
+      - label: mechanical
+        value: Machinery
+      - label: manufacture
+        value: Manufacturing
+      - label: media
+        value: Media
+      - label: non-profit organization
+        value: Not_For_Profit
+      - label: other
+        value: Other
+      - label: Leisure
+        value: Recreation
+      - label: retail
+        value: Retail
+      - label: Shipping
+        value: Shipping
+      - label: science and technology
+        value: Technology
+      - label: telecommunications
+        value: Telecommunications
+      - label: Transportation
+        value: Transportation
+      - label: Utilities
+        value: Utilities
+    filterable: true
+  number_of_employees:
+    type: number
+    label: Number of employees
+  state:
+    label: area
+    type: select
+    sortable: true
+    options:
+ - label: Beijing
+        value: BJ
+      - label: Shanghai
+        value: SH
+      - label: Chongqing
+        value: CQ
+      - label: Tianjin
+        value: TJ
+      - label: Hebei
+        value: HB
+      - label: Shanxi
+        value: SX
+      - label: Liaoning
+        value: LN
+      - label: Jilin
+        value: GL
+      - label: Heilongjiang
+        value: HLJ
+      - label: Jiangsu
+        value: JS
+      - label: zhejiang
+        value: ZJ
+      - label: Anhui
+        value: AH
+      - label: Fujian
+        value: FJ
+      - label: Jiangxi
+        value: JX
+      - label: Shandong
+        value: SD
+      - label: henan
+        value: HN
+      - label: Hubei
+        value: HUB
+      - label: Hunan
+        value: HUN
+      - label: Guangdong
+        value: GD
+      - label: Hainan
+        value: HAN
+      - label: Sichuan
+        value: SC
+      - label: Guizhou
+        value: GZ
+      - label: Yunnan
+        value: YN
+      - label: Shaanxi
+        value: SHX
+      - label: Gansu
+        value: GS
+      - label: Qinghai
+        value: QH
+      - label: Inner Mongolia
+        value: NMG
+      - label: Guangxi
+        value: GX
+      - label: tibet
+        value: XZ
+      - label: Ningxia
+        value: NX
+      - label: Xinjiang
+        value: XJ
+      - label: Hong Kong
+        value: HK
+      - label: macau
+        value: AM
+      - label: Taiwan
+        value: TW
+    filterable: true
+    inlineHelpText: The region to which the business partner is assigned.
+  # billing_city:
+  #   type: text
+  #   label: Billing Address-City
+  #   group: Address information
+  # shipping_city:
+  #   type: text
+  #   label: Shipping address-city
+  #   group: Address information
+  billing_address:
+    type: textarea
+    label: Billing address
+    rows: 3
+    group: Address information
+  shipping_address:
+    type: textarea
+    label: delivery address
+    rows: 3
+    group: Address information
+  # billing_zip:
+  #   type: text
+  #   label: 开单地址-邮政编码
+  #   group: 地址信息
+  # shipping_zip:
+  #   type: text
+  #   label: 发货地址-邮政编码
+  #   group: 地址信息
+  account_number:
+    type: text
+    label: business partner number
+    hidden: true
+  rating:
+    label: Grading
+    type: select
+    sortable: true
+    options:
+      - label: Very important
+        value: Hot
+      - label: important
+        value: Warm
+      - label: usually
+        value: Cold
+    filterable: true
+    inlineHelpText: How you classify this business partner's level, for example, Normal, Important.
+    #hidden: true
+  invoice_address:
+    label: Billing address
+    group: Billing Information
+    type: text
+    name: invoice_address
+  invoice_phone:
+    label: Invoicing phone number
+    group: Billing Information
+    type: text
+    name: invoice_phone
+  invoice_bank:
+    label: Account opening bank
+    group: Billing Information
+    type: text
+    name: invoice_bank
+  invoice_combinenum:
+    label: account
+    group: Billing Information
+    type: text
+    name: invoice_combinenum
+  account_source:
+    type: text
+    label: Business Partner Source
+    hidden: true
+  site:
+    type: text
+    label: business partner location
+    hidden: true
+    inlineHelpText: You can use the Business Partner Location field to specify different locations within the same company. For example, let's say Baidu has offices in Beijing and Shanghai. Create two business partners named Baidu, but the values ​​of the business partner locations are Beijing and Shanghai respectively.
+  annual_revenue:
+    label: Annual income
+    type: currency
+    hidden: true
+  ownership:
+    label: ownership
+    type: select
+    sortable: true
+    options:
+      - label: State-owned
+        value: National
+      - label: private
+        value: Private
+      - label: Subsidiaries
+        value: Subcompany
+      - label: other
+        value: Others
+    inlineHelpText: The ownership of a company, for example, public or private.
+    hidden: true
+  # account_currency:
+  #   label: 业务伙伴币种
+  #   type: lookup
+  #   reference_to: currency
+  #   hidden: true
+  account_division:
+    label: Business Partner Division
+    type: text
+    hidden: true
+  partner_account:
+    label: Partner
+    type: boolean
+    hidden: true
+  assistant:
+    label: assistant
+    type: text
+    hidden: true
+  asst_phone:
+    label: Assistant phone number
+    type: text
+    hidden: true
+  birthdate:
+    label: Birthday
+    type: date
+    hidden: true
+  department:
+    label: department
+    type: text
+    hidden: true
+  email:
+    label: e-mail
+    type: email
+    hidden: true
+  do_not_call:
+    label: Do not call
+    type: boolean
+    inlineHelpText: Do you want to contact the contact by phone.
+    hidden: true
+  has_opted_out_of_email:
+    label: Exit mailing list
+    type: boolean
+    inlineHelpText: Whether to include the contact in the bulk mailing list.
+    hidden: true
+  fax_opt_out:
+    label: Exit fax list
+    type: boolean
+    inlineHelpText: Whether to include contacts in faxes.
+    hidden: true
+  home_phone:
+    label: home phone
+    type: text
+    hidden: true
+  lead_source:
+    type: select
+    label: Sources of potential business partners
+    searchable: true
+    sortable: true
+    options:
+      - label: advertise
+        value: Advertisement
+      - label: business partner activities
+        value: Customer_Event
+      - label: Employee recommendations
+        value: Employee_Referral
+      - label: Baidu search
+        value: Baidu_AdWords
+      - label: other
+        value: Other
+      - label: Partner
+        value: Partner
+      - label: Purchasing List
+        value: Purchased_List
+      - label: trade show
+        value: Trade_Show
+      - label: Online seminar
+        value: Webinar
+      - label: website
+        value: Website
+    filterable: true
+    inlineHelpText: Sources of potential business partners, such as advertising, partners, or the web.
+    hidden: true
+  mailing_city:
+    type: text
+    label: Mailing Address-City
+    group: Address information
+    hidden: true
+  mailing_street:
+    type: text
+    label: Mailing address-street
+    group: Address information
+    hidden: true
+  mailing_zip:
+    type: text
+    label: Mailing address - postal code
+    group: Address information
+    hidden: true
+  other_city:
+    type: text
+    label: Other Address-City
+    group: Other address information
+    hidden: true
+  other_street:
+    type: text
+    label: Other Address-Street
+    group: Other address information
+    hidden: true
+  other_zip:
+    type: text
+    label: Other address - postal code
+    group: Other address information
+    hidden: true
+  mobile:
+    label: cell phone
+    type: text
+    hidden: true
+  salutation:
+    type: select
+    label: gender
+    hidden: true
+    options:
+      - label: male
+        value: Male
+      - label: female
+        value: Female
+  other_phone:
+    label: Other phone numbers
+    type: text
+    hidden: true
+list_views:
+  recent:
+    label: Recently viewed
+    columns:
+      - field: name
+        width: 300
+        wrap: true
+      - field: type
+        width: 120
+      - field: rating
+        width: 120
+      - field: billing_address
+        width: 400
+      - field: shipping_address
+        width: 400
+      - field: owner
+        width: 120
+    filter_scope: space
+    filter_fields:
+      - type
+      - industry
+      - rating
+      - name
+  all:
+    label: All business partners
+    columns:
+      - field: name
+        width: 300
+        wrap: true
+      - field: type
+        width: 120
+      - field: rating
+        width: 120
+      - field: billing_address
+        width: 400
+      - field: shipping_address
+        width: 400
+      - field: owner
+        width: 120
+    filter_scope: space
+    filter_fields:
+      - type
+      - industry
+      - rating
+      - name
+  # allCustomers:
+  #   label: 所有顾客
+  #   filters: !<tag:yaml.org,2002:js/function> |-
+  #     function () {
+  #         return [
+  #           ["type","=","Customer"]
+  #         ];
+  #     }
+  #   columns:
+  #     - field: name
+  #       width: 300
+  #       wrap: true
+  #     - field: type
+  #       width: 120
+  #     - field: rating
+  #       width: 120
+  #     - field: billing_address
+  #       width: 400
+  #     - field: shipping_address
+  #       width: 400
+  #     - field: owner
+  #       width: 120
+  #   filter_scope: space
+  #   filter_fields:
+  #     - type
+  #     - industry
+  #     - name
+  hotRating:
+    label: very important business partner
+    filters: !<tag:yaml.org,2002:js/function> |-
+      function () {
+          return [
+            ["rating","=","hot"]
+          ];
+      }
+    columns:
+      - field: name
+        width: 300
+        wrap: true
+      - field: type
+        width: 120
+      - field: rating
+        width: 120
+      - field: billing_address
+        width: 400
+      - field: shipping_address
+        width: 400
+      - field: owner
+        width: 120
+    filter_scope: space
+    filter_fields:
+      - type
+      - industry
+      - name
+  mine:
+    label: my business partner
+    columns:
+      - field: name
+        width: 300
+        wrap: true
+      - field: type
+        width: 120
+      - field: rating
+        width: 120
+      - field: billing_address
+        width: 400
+      - field: shipping_address
+        width: 400
+      - field: owner
+        width: 120
+    filter_scope: mine
+    filter_fields:
+      - type
+      - industry
+      - rating
+      - name
+actions:
+  enableSupplier:
+    label: Enable as a vendor
+    on: record_only_more
+  disableSupplier:
+    label: Disable vendor account
+    on: record_only_more
+  enableCustomer:
+    label: Enable as business partner
+    on: record_only_more
+  disableCustomer:
+    label: Disable business partner account
+    on: record_only_more
+permission_set:
+  user:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true 
+  contract_manager:
+    allowCreate: true
+    allowEdit: true
+    allowDelete: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true

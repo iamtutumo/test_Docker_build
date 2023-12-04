@@ -1,0 +1,61 @@
+image:
+  file: .gitpod.Dockerfile
+
+# List the ports you want to expose and what to do when they are served. See https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 5000
+    onOpen: ignore
+    visibility: public
+  - port: 3000
+    onOpen: ignore
+    visibility: public
+  - port: 6379
+    onOpen: ignore
+  - port: 27017
+    onOpen: ignore
+  - port: 3100 # Creator
+    onOpen: open-browser
+    visibility: public
+  - port: 16686 # Jaeger UI
+    onOpen: open-browser
+    visibility: public
+  - port: 5432
+    onOpen: ignore
+    visibility: public
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - name: Mongo
+    init: |
+      mkdir -p /workspace/mongodb/data/db
+    command: |
+      mongod --replSet rs0 --dbpath /workspace/mongodb/data/db
+  - command: |
+      gp await-port 27017
+      mongo steedos --eval "rs.initiate()"
+      exit
+  - name: Redis
+    command: |
+      redis-server --save "" --appendonly no --client-output-buffer-limit replica 0 0 0 --client-output-buffer-limit pubsub 0 0 0 --client-output-buffer-limit slave 0 0 0
+  - name: Steedos
+    init: |
+      yarn
+    command: |
+      git config pull.rebase false
+      rm creator/.env.local
+      cp creator/.env creator/.env.local
+      sed -i "/^ROOT_URL=*/cROOT_URL=$(gp url 3100)" creator/.env.local
+      echo "ROOT_URL=$(gp url 5000)" >> examples/project-template/.env.local 
+      echo "METADATA_SERVER=$(gp url 5000)" >> examples/project-template/.env.local
+      echo "ROOT_URL=$(gp url 5000)" >> examples/project-ee/.env.local 
+      echo "METADATA_SERVER=$(gp url 5000)" >> examples/project-ee/.env.local
+      npm i steedos-cli --global 
+      npm i --global pnpm
+      yarn install
+      yarn lerna run gitpod:init
+      yarn build
+      gp await-port 27017
+      gp await-port 6379
+      yarn start:ee
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint

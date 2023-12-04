@@ -1,0 +1,21 @@
+{
+  "name": "@steedos/plugin-company",
+  "private": false,
+  "version": "2.3.0-beta.19",
+  "description": "Enterprise plugin for steedos",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steedos/object-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steedos/object-server/issues"
+  },
+  "homepage": "https://github.com/steedos/object-server#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "80ce49d0436a902175913e8324c5b5c5c1391e4a"
+}

@@ -1,0 +1,8 @@
+name: parent
+label: parent object
+is_wide: true
+hidden: true
+reference_to: objects
+reference_to_field: name
+sort_no: 140
+type: lookup

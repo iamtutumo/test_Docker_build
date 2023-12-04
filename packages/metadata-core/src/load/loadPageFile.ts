@@ -1,0 +1,66 @@
+/*
+ * @Author: sunhaolin@hotoa.com
+ * @Date: 2021-08-30 12:06:41
+ * @LastEditors: baozhoutao@hotoa.com
+ * @LastEditTime: 2022-05-18 16:49:13
+ * @Description: 
+ */
+import { SteedosMetadataTypeInfoKeys as TypeInfoKeys } from '../typeInfo';
+import { BaseLoadMetadataFile } from "./_baseLoadFile";
+import path from 'path';
+import fs from 'fs';
+import * as glob from 'glob';
+const crypto = require('crypto')
+
+export class LoadPageFile extends BaseLoadMetadataFile {
+    constructor() {
+        super(TypeInfoKeys.Page);
+    }
+
+    load(filePath) {
+        const pages = super.load(filePath);
+
+        for (const apiName in pages) {
+            const page = pages[apiName];
+            const render_engine = page.render_engine;
+            // 如果render_engine为空或者为redash，则不加载引擎元数据
+            if (!render_engine || render_engine === 'redash') {
+                continue;
+            }
+            // 加载对应的引擎元数据
+            const engineFileName = `${apiName}.page.${render_engine}.json`;
+            const matchedPaths = glob.sync(path.join(filePath, this.metadataInfo.defaultDirectory, engineFileName));
+            if (matchedPaths.length > 1) {
+                throw new Error(`路径${filePath}下检测到多份元数据文件${engineFileName}，请检查。`);
+            }
+            const engineFilePath = matchedPaths[0];
+            if (engineFilePath) {
+                const engineFileContent = fs.readFileSync(engineFilePath);
+                page.schema = engineFileContent.toString();
+            }
+            // 如果pageAssignments为数组，则遍历pageAssignments，给每个assignment计算_id
+            if (page.pageAssignments && page.pageAssignments.length > 0) {
+                page.pageAssignments.forEach(assignment => {
+                    assignment._id = `${apiName}.${getMD5(JSONStringify(assignment))}`;
+                });
+            }
+            page.version = 1;
+        }
+
+        return pages;
+    }
+}
+
+export function getMD5(data){
+    let md5 = crypto.createHash('md5');
+    return md5.update(data).digest('hex');
+}
+
+export function JSONStringify(data) {
+    return JSON.stringify(data, function (key, val) {
+        if (typeof val === 'function') {
+            return val + '';
+        }
+        return val;
+    })
+}

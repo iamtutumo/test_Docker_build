@@ -1,0 +1,115 @@
+name: license
+label: License
+icon: webcart
+hidden: true
+enable_audit: true
+fields:
+  edition:
+    type: text
+    label: Edition
+    hidden: true
+  edition_label:
+    type: text
+    label: Edition
+    is_name: true
+  license:
+    type: textarea
+    rows: 8
+    is_wide: true
+    hidden: true
+  key:
+    type: textarea
+    rows: 15
+    is_wide: true
+    hidden: true
+  product:
+    type: text
+    label: Product
+    hidden: true
+  product_label:
+    type: text
+    label: Product
+  is_trial:
+    type: boolean
+    label: Trial
+    hidden: true
+  user_number:
+    type: number
+    label: User number
+    scale: 0
+  # custom_objects_number:
+  #   type: number
+  #   label: Custom objects number
+  #   scale: 0
+  # flow_number:
+  #   type: number
+  #   label: Flow number
+  #   scale: 0
+  end_date:
+    type: date
+    label: 过期
+    required: true
+  verify_status:
+    type: select
+    options: FAIL,SUCCESS
+  invalid:
+    type: boolean
+    label: Invalid
+    hidden: true
+  lid:
+    type: text
+  verify_error:
+    type: textarea
+    hidden: true
+  license_last_verify:
+    type: datetime
+    omit: true
+    hidden: true
+  is_local:
+    type: boolean
+    hidden: true
+actions:
+  apply:
+    label: Apply
+    on: list
+    visible: false
+  changeSpaceLicense:
+    label: 更新许可证
+    on: list
+    visible: true
+  copySpaceId:
+    label: Copy space id
+    on: list
+    visible: false
+  upgrade:
+    label: Upgrade
+    on: list
+    visible: true
+list_views:
+  all:
+    label: Al
+    columns:
+      - edition_label
+      - product_label
+      - user_number
+      - verify_status
+      - end_date
+    filters:
+      - [['lid', '<>', 'None'], ['invalid','!=',true]]
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    viewAllRecords: true
+    modifyAllRecords: false
+
+    

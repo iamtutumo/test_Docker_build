@@ -1,0 +1,394 @@
+name: permission_objects
+label: Permission
+icon: omni_supervisor
+hidden: true
+version: 2
+fields:
+  name:
+    label: Name
+    type: text
+    is_wide: true
+    visible_on: "{{false}}"
+  permission_set_id:
+    label: Permission Set
+    type: master_detail
+    required: true
+    reference_to: permission_set
+    index: true
+    name: permission_set_id
+    filterable: true
+    reference_limit: 5000
+    reference_sort:
+      name: 1
+  object_name:
+    label: Object
+    type: lookup
+    reference_to: objects
+    write_requires_master_read: true
+    reference_to_field: name
+    index: true
+    required: true
+    create: false
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function () {
+              var _options;
+
+              _options = [];
+
+              _.forEach(Creator.objectsByName, function (o, k) {
+                if (!o.hidden) {
+                  return _options.push({
+                    label: o.label,
+                    value: k,
+                    icon: o.icon
+                  });
+                }
+              });
+
+              return _options;
+            }
+    name: object_name
+    filterable: true
+  allowRead:
+    type: boolean
+    label: Allow Read
+    name: allowRead
+  allowCreate:
+    label: Allow Create
+    type: boolean
+    name: allowCreate
+  allowEdit:
+    label: Allow Edit
+    type: boolean
+    name: allowEdit
+  allowDelete:
+    label: Allow Delete
+    type: boolean
+    name: allowDelete
+  viewAllRecords:
+    type: boolean
+    label: View All Records
+    name: viewAllRecords
+  modifyAllRecords:
+    type: boolean
+    label: Modify All Records
+    name: modifyAllRecords
+  viewCompanyRecords:
+    type: boolean
+    label: View Division's Records
+    name: viewCompanyRecords
+  modifyCompanyRecords:
+    type: boolean
+    label: Modify Division's Records
+    name: modifyCompanyRecords
+  viewAssignCompanysRecords:
+    type: lookup
+    reference_to: company
+    label: 查看指定分部
+    multiple: true
+  modifyAssignCompanysRecords:
+    type: lookup
+    reference_to: company
+    label: 修改指定分部
+    multiple: true
+  allowReadFiles:
+    type: boolean
+    label: Allow Read Files
+    group: Files permissions
+  allowCreateFiles:
+    label: Allow Create Files
+    type: boolean
+    group: Files permissions
+  allowEditFiles:
+    label: Allow Edit Files
+    type: boolean
+    group: Files permissions
+  allowDeleteFiles:
+    label: Allow Delete Files
+    type: boolean
+    group: Files permissions
+  viewAllFiles:
+    type: boolean
+    label: View All Files
+    group: Files permissions
+  modifyAllFiles:
+    type: boolean
+    label: Modify All Files
+    group: Files permissions
+  disabled_list_views:
+    type: lookup
+    label: Disabled ListViews
+    multiple: true
+    depend_on:
+      - object_name
+    defaultIcon: lead_list
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              var _object, _options, list_views;
+
+              _options = [];
+              var objectName = values.object_name;
+              if(_.isObject(values.object_name)){
+                objectName = objectName.name
+              }
+              _object = Creator.getObject(objectName);
+              list_views = _object.list_views;
+
+              _.forEach(list_views, function (f, k) {
+                if (k !== "default" && (!_.has(f, "shared") || f.shared)) {
+                  return _options.push({
+                    label: f.label || f.name || k,
+                    value: f._id
+                  });
+                }
+              });
+
+              return _options;
+            }
+    name: disabled_list_views
+    filterable: true
+  disabled_actions:
+    type: lookup
+    label: Disabled Actions
+    hidden: true
+    omit: true
+    multiple: true
+    depend_on:
+      - object_name
+    defaultIcon: marketing_actions
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              var _object, _options, actions;
+
+              _options = [];
+              var objectName = values.object_name;
+              if(_.isObject(values.object_name)){
+                objectName = objectName.name
+              }
+              _object = Creator.getObject(objectName);
+              actions = _object.actions;
+
+              _.forEach(actions, function (f, k) {
+                if (["standard_new", "standard_edit", "standard_delete"].indexOf(k) < 0) {
+                  return _options.push({
+                    label: f.label || k,
+                    value: k
+                  });
+                }
+              });
+
+              return _options;
+            }
+    name: disabled_actions
+    filterable: true
+  unreadable_fields:
+    type: lookup
+    label: Unreadable Fields
+    hidden: true
+    omit: true
+    multiple: true
+    depend_on:
+      - object_name
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              var _object, _options, fields, icon, object_name;
+
+              object_name = values.object_name;
+
+              if (!object_name) {
+                return [];
+              }
+
+              _options = [];
+              var objectName = values.object_name;
+              if(_.isObject(values.object_name)){
+                objectName = objectName.name
+              }
+              _object = Creator.getObject(objectName);
+              fields = _object.fields;
+              icon = _object.icon;
+
+              _.forEach(fields, function (f, k) {
+                return _options.push({
+                  label: f.label || k,
+                  value: k,
+                  icon: icon
+                });
+              });
+
+              return _options;
+            }
+    name: unreadable_fields
+    filterable: true
+  uneditable_fields:
+    type: lookup
+    label: Uneditable Fields
+    hidden: true
+    omit: true
+    multiple: true
+    depend_on:
+      - object_name
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              var _object, _options, fields, icon, object_name;
+
+              object_name = values.object_name;
+
+              if (!object_name) {
+                return [];
+              }
+
+              _options = [];
+              var objectName = values.object_name;
+              if(_.isObject(values.object_name)){
+                objectName = objectName.name
+              }
+              _object = Creator.getObject(objectName);
+              fields = _object.fields;
+              icon = _object.icon;
+
+              _.forEach(fields, function (f, k) {
+                return _options.push({
+                  label: f.label || k,
+                  value: k,
+                  icon: icon
+                });
+              });
+
+              return _options;
+            }
+    filterable: true
+  unrelated_objects:
+    type: lookup
+    label: Unrelated Objects
+    hidden: true
+    omit: true
+    multiple: true
+    depend_on:
+      - object_name
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function (values) {
+              var _options, related_object_names, related_objects;
+
+              _options = [];
+              var objectName = values.object_name;
+              if(_.isObject(values.object_name)){
+                objectName = objectName.name
+              }
+              related_objects = Creator.getObject(objectName).related_objects;
+              related_object_names = _.uniq(_.pluck(related_objects, "object_name"));
+
+              _.forEach(related_object_names, function (i) {
+                var _object;
+
+                _object = Creator.getObject(i);
+                return _options.push({
+                  label: _object.label || i,
+                  value: i,
+                  icon: _object.icon
+                });
+              });
+
+              return _options;
+            }
+    name: unrelated_objects
+    filterable: true
+  is_system:
+    type: boolean
+    label: 系统
+    # omit: true
+    readonly: true
+    visible_on: "{{global.mode ==='read' ? true : false}}"
+    disabled: true
+paging:
+  enabled: false
+list_views:
+  customize:
+    columns:
+      - permission_set_id
+      - object_name
+      - allowCreate
+      - allowDelete
+      - allowEdit
+      - allowRead
+      - modifyAllRecords
+      - viewAllRecords
+      - modifyCompanyRecords
+      - viewCompanyRecords
+      - is_system
+    label: Customize
+    filters:
+      - ["is_system","<>",true]
+    filter_scope: space
+  system:
+    columns:
+      - permission_set_id
+      - object_name
+      - allowCreate
+      - allowDelete
+      - allowEdit
+      - allowRead
+      - modifyAllRecords
+      - viewAllRecords
+      - modifyCompanyRecords
+      - viewCompanyRecords
+      - is_system
+    label: System
+    filters:
+      - ["is_system","=",true]
+    filter_scope: space
+  all:
+    label: All
+    columns:
+      - permission_set_id
+      - object_name
+      - allowCreate
+      - allowDelete
+      - allowEdit
+      - allowRead
+      - modifyAllRecords
+      - viewAllRecords
+      - modifyCompanyRecords
+      - viewCompanyRecords
+      - is_system
+    filter_scope: space
+actions:
+  customize:
+    label: Customize
+    on: record_only
+  resetFieldPermissions:
+    label: 重置字段权限
+    on: record_only
+relatedList:
+  - objectName: permission_fields
+    columns:
+      - field
+      - editable
+      - readable
+      - is_system
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true
+form:
+  beforeView: !!js/function |
+    function(){
+      /*附件权限需要兼容之前没有附件权限配置功能时的设置，取好默认值显示即可*/
+      Creator.processPermissions(this.doc);
+    }
+  beforeEdit: !!js/function |
+    function(){
+      /*附件权限需要兼容之前没有附件权限配置功能时的设置，取好默认值显示即可*/
+      Creator.processPermissions(this.doc);
+    }

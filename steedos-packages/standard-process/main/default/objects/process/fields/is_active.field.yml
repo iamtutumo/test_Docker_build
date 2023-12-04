@@ -1,0 +1,4 @@
+name: is_active
+label: process status
+type: toggle
+sort_no: 50

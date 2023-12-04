@@ -1,0 +1,40 @@
+name: page_versions
+label: Page version
+description: 
+fields:
+  description:
+    label: Description
+    help: 
+    description: 
+  is_active:
+    label: Actived
+    help: 
+    description: 
+  is_system:
+    label: System
+    help: 
+    description: 
+  page:
+    label: Page
+    help: 
+    description: 
+  schema:
+    label: Schema
+    help: 
+    description: 
+  version:
+    label: Version
+    help: 
+    description: 
+listviews:
+  all:
+    label: All
+  recent:
+    label: Recent
+actions:
+  standard_delete:
+    label: standard_delete
+  standard_delete_many:
+    label: standard_delete_many
+  standard_new:
+    label: standard_new

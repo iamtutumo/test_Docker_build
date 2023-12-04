@@ -1,0 +1,95 @@
+name: audit_login
+label: Log
+icon: record
+hidden: true
+fields:
+  username:
+    label: Username
+    type: text
+    is_name: true
+    name: username
+    searchable: true
+  login_time:
+    label: Login Time
+    type: datetime
+    name: login_time
+  source_ip:
+    label: IP
+    type: text
+    name: source_ip
+  location:
+    label: Location
+    type: text
+    name: location
+  login_type:
+    label: Login Type
+    type: text
+    name: login_type
+  status:
+    label: Status
+    type: text
+    name: status
+  browser:
+    label: Browser
+    type: text
+    name: browser
+  platform:
+    label: Platform
+    type: text
+    name: platform
+  application:
+    label: Application
+    type: text
+    name: application
+  client_version:
+    label: Client Version
+    type: text
+    name: client_version
+  api_type:
+    label: API Type
+    type: text
+    name: api_type
+  api_version:
+    label: API Version
+    type: text
+    name: api_version
+  login_url:
+    label: Login URL
+    type: text
+    name: login_url
+list_views:
+  all:
+    label: All Logs
+    filter_scope: space
+    columns:
+      - username
+      - login_time
+      - source_ip
+      - location
+      - login_type
+      - status
+      - browser
+      - platform
+      - application
+      - client_version
+      - api_type
+      - api_version
+      - login_url
+  recent:
+    label: Recently Viewed Logs
+    filter_scope: space
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true

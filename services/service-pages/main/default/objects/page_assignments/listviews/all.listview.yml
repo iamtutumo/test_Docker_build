@@ -1,0 +1,16 @@
+name: all
+columns:
+  - field: type
+  - field: app
+  - field: profile
+  # - field: record_type
+  - field: mobile
+  - field: desktop
+  - field: is_system
+filter_scope: space
+filters: []
+label: 所有
+scrolling_mode: standard
+shared: true
+sort_no: 100
+type: grid

@@ -1,0 +1,37 @@
+{
+  "name": "@steedos/service-metadata",
+  "version": "2.3.0-beta.19",
+  "description": "",
+  "main": "lib/metadata.service.js",
+  "scripts": {
+    "start": "yarn build && moleculer-runner lib/*.service.js",
+    "dev": "yarn build && moleculer-runner --repl --hot lib/*.service.js",
+    "cli": "moleculer connect redis://127.0.0.1:6379",
+    "ci": "jest --watch",
+    "test": "jest --coverage",
+    "lint": "eslint services",
+    "dc:up": "docker-compose up --build -d",
+    "dc:logs": "docker-compose logs -f",
+    "dc:down": "docker-compose down",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@steedos/metadata-registrar": "2.3.0-beta.19",
+    "dotenv-flow": "^3.1.0",
+    "ioredis": "^4.22.0",
+    "lodash": "^4.17.21",
+    "moleculer": "^0.14.21",
+    "moleculer-web": "^0.10.4",
+    "underscore": "1.13.4"
+  },
+  "devDependencies": {
+    "typescript": "4.6.3"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "80ce49d0436a902175913e8324c5b5c5c1391e4a"
+}

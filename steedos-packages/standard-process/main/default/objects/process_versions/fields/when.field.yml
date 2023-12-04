@@ -1,0 +1,12 @@
+name: when
+label: When to execute entry formula
+type: select
+options: 
+  - label: After the object record is added
+    value: afterInsert
+  - label: After the object record is updated
+    value: afterUpdate
+  - label: After the object record is added or updated
+    value: afterInsertOrUpdate
+sort_no: 50
+readonly: true

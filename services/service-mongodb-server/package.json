@@ -1,0 +1,14 @@
+{
+  "name": "@steedos/service-mongodb-server",
+  "version": "2.3.0-beta.19",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@steedos/mongodb-memory-server-core": "^7.0.0-beta.14"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "80ce49d0436a902175913e8324c5b5c5c1391e4a"
+}

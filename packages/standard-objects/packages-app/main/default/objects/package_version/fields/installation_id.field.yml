@@ -1,0 +1,7 @@
+name: installation_id
+label: Package ID
+type: text
+omit: false
+is_wide: true
+readonly: true
+sort_no: 9000

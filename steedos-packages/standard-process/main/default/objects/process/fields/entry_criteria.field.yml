@@ -1,0 +1,5 @@
+name: entry_criteria
+label: Entrance official
+type: textarea
+required: true
+sort_no: 60

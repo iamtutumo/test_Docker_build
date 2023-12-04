@@ -1,0 +1,4 @@
+name: customize
+is_enable: true
+label: customize
+'on': record_only

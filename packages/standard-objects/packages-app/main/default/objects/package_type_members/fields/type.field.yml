@@ -1,0 +1,42 @@
+name: type
+defaultValue: null
+description: null
+filterable: false
+group: null
+index: false
+inlineHelpText: null
+is_name: false
+is_wide: false
+label: type
+multiple: false
+hidden: true
+omit: true
+options:
+  - label: Custom button
+    value: CustomAction
+  - label: Custom application
+    value: CustomApplication
+  - label: Custom fields
+    value: CustomField
+  - label: list view
+    value: CustomListview
+  - label: custom object
+    value: CustomObject
+  - label: Object permissions
+    value: CustomPermission
+  - label: permission set
+    value: CustomPermissionset
+  - label: profile
+    value: CustomProfile
+  - label: Report
+    value: CustomReport
+  - label: Validation rules
+    value: CustomValidationRule
+  - label: Page Layout
+    value: Layout
+readonly: false
+required: false
+searchable: false
+sort_no: 130
+sortable: false
+type: select

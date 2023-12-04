@@ -1,0 +1,27 @@
+name: resources.$.component_type
+label: Component Type
+readonly: true
+type: select
+options:
+  - label: Custom button
+    value: CustomAction
+  - label: Custom application
+    value: CustomApplication
+  - label: Custom fields
+    value: CustomField
+  - label: list view
+    value: CustomListview
+  - label: custom object
+    value: CustomObject
+  - label: Object permissions
+    value: CustomPermission
+  - label: permission set
+    value: CustomPermissionset
+  - label: profile
+    value: CustomProfile
+  - label: Report
+    value: CustomReport
+  - label: Validation rules
+    value: CustomValidationRule
+  - label: Page Layout
+    value: Layout

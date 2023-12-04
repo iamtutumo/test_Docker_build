@@ -1,0 +1,5 @@
+name: view
+is_enable: true
+label: Preview
+'on': record_only
+visible: true

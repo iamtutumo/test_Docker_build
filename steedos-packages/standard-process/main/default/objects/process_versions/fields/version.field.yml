@@ -1,0 +1,6 @@
+name: version
+label: version number
+type: number
+scale: 0
+sort_no: 30
+readonly: true

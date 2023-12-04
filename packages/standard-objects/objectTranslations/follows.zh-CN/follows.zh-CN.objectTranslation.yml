@@ -1,0 +1,15 @@
+name: follows
+label: focus on
+description: 
+fields:
+  object_name:
+    label: object
+    help: 
+    description: 
+  owner:
+    label: Followers
+    help: 
+    description: 
+listviews:
+  all:
+    label: all

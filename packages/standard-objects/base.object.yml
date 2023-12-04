@@ -1,0 +1,265 @@
+name: base
+hidden: true
+fields:
+  owner:
+    label: Owner
+    type: lookup
+    reference_to: users
+    sortable: true
+    index: true
+    defaultValue: "{userId}"
+    hidden: true
+    sort_no: 1000
+  space:
+    type: lookup
+    label: Space
+    reference_to: spaces
+    index: true
+    hidden: true
+    defaultValue: "{spaceId}"
+  created:
+    type: datetime
+    label: Creation Time
+    readonly: true
+    sortable: true
+    index: true
+    group: System Information
+    sort_no: 9999
+  created_by:
+    label: Created by
+    type: lookup
+    readonly: true
+    reference_to: users
+    disabled: true
+    index: true
+    group: System Information
+    sort_no: 9999
+  modified:
+    label: Modification Time
+    type: datetime
+    readonly: true
+    sortable: true
+    index: true
+    group: System Information
+    sort_no: 9999
+  modified_by:
+    label: Modified by
+    type: lookup
+    readonly: true
+    reference_to: users
+    disabled: true
+    index: true
+    group: System Information
+    sort_no: 9999
+  is_deleted:
+    type: boolean
+    label: Deleted
+    index: true
+    hidden: true
+  deleted:
+    label: Deletion Time
+    type: datetime
+    readonly: true
+    sortable: true
+    index: true
+    hidden: true
+  deleted_by:
+    label: Deleted by
+    type: lookup
+    readonly: true
+    reference_to: users
+    disabled: true
+    hidden: true
+  instances:
+    label: Instances
+    type: grid
+    omit: true
+    hidden: true
+  instances.$._id:
+    label: Instance ID
+    type: text
+    omit: true
+    hidden: true
+  instances.$.state:
+    label: State
+    type: text
+    omit: true
+    hidden: true
+  sharing:
+    label: Record Level Permission
+    type: grid
+    omit: true
+    hidden: true
+    blackbox: true
+  sharing.$:
+    label: Authorization
+    blackbox: true
+    omit: true
+    hidden: true
+  sharing.$.u:
+    label: Authorized Users
+    type: "[text]"
+    omit: true
+    hidden: true
+  sharing.$.o:
+    label: Authorized Departments
+    type: "[text]"
+    omit: true
+    hidden: true
+  sharing.$.r:
+    label: Rule
+    type: text
+    omit: true
+    hidden: true
+  message_count:
+    label: Number of Messages
+    type: number
+    omit: true
+    hidden: true
+  locked:
+    label: Locked
+    type: boolean
+    hidden: true
+    sort_no: 1100
+  company_id:
+    label: Division
+    type: lookup
+    reference_to: company
+    sortable: true
+    index: true
+    defaultValue: !!js/function |
+      function(){
+        return Steedos.StandardObjects.Base.Fields.companyId.defaultValue.apply(this, arguments)
+      }
+    optionsFunction: !!js/function |
+      function (values) {
+        return Steedos.StandardObjects.Base.Fields.companyId.optionsFunction.apply(this, arguments)
+      }
+    hidden: true
+    sort_no: 1200
+  company_ids:
+    label: All Divisions
+    type: lookup
+    reference_to: company
+    sortable: true
+    index: true
+    multiple: true
+    defaultValue: !!js/function |
+      function(){
+        return Steedos.StandardObjects.Base.Fields.companyIds.defaultValue.apply(this, arguments)
+      }
+    optionsFunction: !!js/function |
+      function (values) {
+        return Steedos.StandardObjects.Base.Fields.companyIds.optionsFunction.apply(this, arguments)
+      }
+    hidden: true
+    sort_no: 1300
+  instance_state:
+    label: Instance State
+    type: select
+    options:
+      - label: Draft
+        value: draft
+      - label: Pending
+        value: pending
+      - label: Completed
+        value: completed
+      - label: Approved
+        value: approved
+      - label: Rejected
+        value: rejected
+      - label: Terminated
+        value: terminated
+    visible_on: "{{false}}"
+    sort_no: 1400
+  process_state:
+    label: Process State
+    type: select
+    options:
+      - label: Draft
+        value: draft
+      # - label: Pending
+      #   value: pending
+      # - label: Completed
+      #   value: completed
+      - label: Approved
+        value: approved
+      - label: Rejected
+        value: rejected
+      - label: Withdrawn
+        value: withdrawn
+      - label: Terminated
+        value: terminated
+    hidden: true
+    sort_no: 1500
+  _table:
+    label: Object Workflow Related Form Table Item Info
+    type: object
+    omit: true
+    hidden: true
+  _table._id:
+    type: text
+    label: Object Workflow Related Form Table Item ID
+    omit: true
+    hidden: true
+  _table._code:
+    type: text
+    label: Object Workflow Related Form Table Code
+    omit: true
+    hidden: true
+  record_permissions:
+    type: object
+    hidden: true
+actions:
+  standard_query:
+    label: Search
+  standard_new:
+    label: New
+  standard_open_view:
+    label: Open
+  standard_edit:
+    label: Edit
+  standard_delete:
+    label: Delete
+  standard_delete_many:
+    label: Delete
+  standard_approve:
+    label: Initiate Approval
+  standard_view_instance:
+    label: View Instance
+  standard_follow:
+    label: Follow
+  standard_submit_for_approval:
+    label: Submit for Approval
+  standard_import_data:
+    label: Import Data
+    on: list
+    todo: !!js/function |
+      function(objectName){
+        return Steedos.StandardObjects.Base.Actions.standard_import_data.todo.apply(this, arguments)
+      }
+    visible: !!js/function |
+      function(objectName){
+        return Steedos.StandardObjects.Base.Actions.standard_import_data.visible.apply(this, arguments)
+      }
+permission_set:
+  none:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+  user:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true

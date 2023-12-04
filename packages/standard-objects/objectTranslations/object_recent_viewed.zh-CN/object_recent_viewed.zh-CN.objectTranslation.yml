@@ -1,0 +1,19 @@
+name: object_recent_viewed
+label: Recently viewed
+description: 
+fields:
+  record:
+    label: Record
+    help: 
+    description: 
+  space:
+    label: company
+    help: 
+    description: 
+  count:
+    label: frequency
+    help: 
+    description: 
+listviews:
+  all:
+    label: all

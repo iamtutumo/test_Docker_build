@@ -1,0 +1,5 @@
+name: copy
+is_enable: true
+label: copy
+'on': record
+visible: true

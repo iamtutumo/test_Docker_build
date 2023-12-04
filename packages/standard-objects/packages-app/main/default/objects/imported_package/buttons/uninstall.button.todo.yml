@@ -1,0 +1,5 @@
+name: uninstall
+is_enable: true
+label: uninstall
+'on': record
+visible: true

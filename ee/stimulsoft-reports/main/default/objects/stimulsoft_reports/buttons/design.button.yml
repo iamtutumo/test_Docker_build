@@ -1,0 +1,5 @@
+name: design
+is_enable: true
+label: design
+'on': record_only
+visible: true

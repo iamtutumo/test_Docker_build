@@ -1,0 +1,24 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# docker stack deploy node-red --compose-file docker-compose-node-red.yml
+# docker-compose -f docker-compose-node-red.yml -p myNoderedProject up
+################################################################################
+version: "3.9"
+
+services:
+  nodered:
+    image: steedos/node-red:latest
+    environment:
+      - TZ=Asia/Beijing
+      - NODE_RED_USERNAME=root
+      - NODE_RED_PASSWORD=nodered123
+      - NODE_RED_THEME_TITLE=Steedos Node-RED
+    volumes:
+      - nodered-data:/data
+    ports:
+      - "1880:1880"
+
+
+volumes:
+  nodered-data:

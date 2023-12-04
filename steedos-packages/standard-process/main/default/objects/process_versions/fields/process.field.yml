@@ -1,0 +1,6 @@
+name: process
+type: master_detail
+label: Process to which it belongs
+reference_to: process
+sort_no: 90
+readonly: true

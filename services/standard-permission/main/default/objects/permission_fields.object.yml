@@ -1,0 +1,184 @@
+name: permission_fields
+label: 字段权限
+icon: omni_supervisor
+version: 2
+enable_inline_edit: false
+hidden: true
+fields:
+  name:
+    label: Api 名称
+    type: text
+    readonly: true
+    sort_no: 100
+  permission_set_id:
+    label: 权限集
+    type: lookup
+    reference_to: permission_set
+    index: true
+    name: permission_set_id
+    filterable: true
+    reference_to_field: name
+    readonly: true
+    sort_no: 110
+  permission_object:
+    label: 对象权限
+    type: master_detail
+    required: true
+    reference_to: permission_objects
+    index: true
+    name: permission_object
+    reference_to_field: name
+    filterable: true
+    hidden: false
+    readonly: true
+    sort_no: 120
+  object_name:
+    readonly: true
+    label: 对象
+    type: lookup
+    reference_to: objects
+    write_requires_master_read: true
+    reference_to_field: name
+    index: true
+    required: true
+    create: false
+    sort_no: 130
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function () {
+              var _options;
+
+              _options = [];
+
+              _.forEach(Creator.objectsByName, function (o, k) {
+                if (!o.hidden) {
+                  return _options.push({
+                    label: o.label,
+                    value: k,
+                    icon: o.icon
+                  });
+                }
+              });
+
+              return _options;
+            }
+    name: object_name
+    filterable: true
+  field:
+    readonly: true
+    type: lookup
+    label: 字段
+    reference_to: object_fields
+    reference_to_field: name
+    sort_no: 140
+    depend_on:
+      - object_name
+    defaultIcon: service_contract
+    filtersFunction: !<tag:yaml.org,2002:js/function> |-
+      function (filters, values) {
+        if(values && values.object_name){
+          if(values._grid_row_id){
+            var selected = _.find(values.fields, function(item){return item._id==values._grid_row_id});
+            var selectedAll = _.pluck(values.fields, 'field_name');
+            if(selected){
+              selectedAll = _.difference(selectedAll, [selected.field_name]);
+            }
+            if(selectedAll && selectedAll.length > 0){
+              return [['object', '=', values.object_name], ['name', '!=', selectedAll]]
+            }
+          }
+          return ['object', '=', values.object_name]
+        }else{
+          return ['_id', '=', 'no']
+        }
+      }
+  readable:
+    type: boolean
+    label: 允许查看
+    sort_no: 150
+  editable:
+    label: 允许编辑
+    type: boolean
+    sort_no: 160
+  is_system:
+    type: boolean
+    label: 系统
+    # omit: true
+    readonly: true
+    visible_on: "{{global.mode ==='read' ? true : false}}"
+    disabled: true
+    sort_no: 170
+paging:
+  enabled: false
+actions:
+  standard_new:
+    label: standard_new
+    visible: !!js/function |
+      function(){
+        return false;
+      }
+list_views:
+  customize:
+    columns:
+      - permission_set_id
+      - field
+      - readable
+      - editable
+      - is_system
+    label: Customize
+    filters:
+      - ["is_system","<>",true]
+    filter_scope: space
+  system:
+    columns:
+      - permission_set_id
+      - field
+      - readable
+      - editable
+      - is_system
+    label: System
+    filters:
+      - ["is_system","=",true]
+    filter_scope: space
+  all:
+    label: All
+    columns:
+      - permission_set_id
+      - field
+      - readable
+      - editable
+      - is_system
+    filter_scope: space
+form:
+  onValuesChange: !!js/function |
+    function(props){
+      const { changedValues, values, form } = props;
+      const readonlyFields = ['created', 'created_by', 'modified', 'modified_by'];
+      if(changedValues.editable){
+        if(window._.include(readonlyFields, values.field)){
+          return setTimeout(function(){
+            form.setFieldsValue({editable: false})
+          }, 50)
+        }
+        form.setFieldsValue({readable: true});
+      }
+      
+      if(_.has(changedValues, 'readable') && !changedValues.readable && values.editable){
+        form.setFieldsValue({editable: false})
+      }
+    }
+
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: false
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true

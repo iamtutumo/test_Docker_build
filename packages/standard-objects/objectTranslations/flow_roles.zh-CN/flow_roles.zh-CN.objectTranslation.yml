@@ -1,0 +1,14 @@
+name: flow_roles
+label: post
+description: 
+fields:
+  name:
+    label: name
+    help: 
+    description: 
+listviews:
+  all:
+    label: all
+actions:
+  customize:
+    label: customize

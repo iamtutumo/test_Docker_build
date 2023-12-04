@@ -1,0 +1,116 @@
+//@import '{}/node_modules/@steedos/builder-object/dist/builder-object.react.css';
+body{
+    &.steedos.fixed{
+        position: unset!important;
+    }
+}
+input::-webkit-contacts-auto-fill-button {
+ //Hide the autofill button that appears in the text box when creating a new record in Safari browser    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+
+.steedos.creator .creator-content-wrapper .content-wrapper {
+    top: 0;
+}
+
+.steedos.creator .creator-content-wrapper .main-sidebar {
+    margin-top: 0;
+}
+
+.steedos.workflow {
+    .creator-list-wrapper {
+        top: 50px;
+    }
+    
+}
+.steedos.creator .creator-content-wrapper{
+    .app-object-home, .app-home{
+        height: 100%;
+        width: 100%;
+    }
+}
+.steedos{
+    .modal-dialog{
+        .modal-body{
+            //  Image upload tag style optimization in summernote package
+            .form-group.note-group-select-from-files{
+                label:after {
+                    content: "选择文件";
+                    position: absolute;
+                    margin-top: 15px;
+                    left: 15px;
+                    top: 30px;
+                    padding: 3px;
+                    border-radius: 4px;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                    text-align: center;
+                    border: 1px solid #dddbda;
+                    color: #0070d2;
+                    font-weight: 420;
+                    cursor: pointer;
+                    width: 88px;
+                }
+                .note-image-input.form-control{
+                    opacity: 0;
+                    width: 88px;
+                }
+            }
+        }
+    }
+    .dropdown-menu{
+        // For reference, salesforce uses 12px.
+        font-size: 12px;
+        min-width: 172px;
+    }
+
+    .creator-mobile-header{
+        .steedos-header-favorites, .header-notifications{
+            section.slds-popover {
+                position: fixed !important;
+                top: 44px !important;
+                left: 10px !important;
+                right: 10px !important;
+                bottom: auto;
+                width: auto;
+                left: 0 !important;
+                right: 0 !important;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-radius: 0;
+                &:after,&:before{
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+
+    #chooseFlowTree-myFavorite__label{
+        a{
+            svg{
+                display: inline;
+            }
+        }
+    }
+    .slds-section{
+        .slds-section__title{
+             /*Because our stemos_button template must have a layer of div outside, causing the folding control under the section to look like Formula exception, the following code needs to be corrected*/
+            .steedos-button-wrap{
+                width: 100%;
+                display: flex;
+                height: 32px;
+                >.slds-section__title-action{
+                    justify-content: flex-start;
+                }
+            }
+        }
+    }
+}
+
+.slds-global-header .slds-global-header__item.slds-global-header__item--search{
+    display: none;
+}

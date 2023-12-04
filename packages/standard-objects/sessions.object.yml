@@ -1,0 +1,72 @@
+name: sessions
+label: Session
+icon: queue
+hidden: true
+fields:
+  name:
+    label: Name
+    type: text
+    required: true
+  userId: 
+    label: User
+    type: lookup
+    reference_to: users
+    required: true
+  token: 
+    label: Token
+    type: text
+    required: true
+  userAgent: 
+    label: User Agent
+    type: text
+  ip: 
+    label: IP Address
+    type: text
+  valid:
+    label: valid
+    type: boolean
+  is_phone:
+    label: 手机
+    type: boolean
+  is_tablet:
+    label: 平板电脑
+    type: boolean
+  client_id: 
+    label: Client ID
+    type: text
+  connected_app_id:
+    label: connected App ID
+    type: lookup
+    reference_to: connected_apps
+  modified:
+    label: Last Login Time
+  created:
+    label: First Login Time
+list_views:
+  all:
+    label: All Session
+    columns:
+      - userId
+      - ip
+      - userAgent
+      - is_phone
+      - is_tablet
+      - modified
+    sort: [["modified", "desc"]]
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+    modifyCompanyRecords: false
+    viewCompanyRecords: true
+  admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true

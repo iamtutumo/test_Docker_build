@@ -1,0 +1,5 @@
+name: generator
+is_enable: true
+label: Create API Key
+'on': list
+visible: true

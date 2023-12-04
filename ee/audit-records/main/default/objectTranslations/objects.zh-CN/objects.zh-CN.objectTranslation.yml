@@ -1,0 +1,6 @@
+name: objects
+fields:
+  enable_audit:
+    label: Record field history
+    help:
+    description:

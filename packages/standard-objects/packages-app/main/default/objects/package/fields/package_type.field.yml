@@ -1,0 +1,20 @@
+name: package_type
+filterable: false
+hidden: true
+index: false
+is_name: false
+is_wide: false
+label: Package type
+multiple: false
+omit: false
+options:
+  - label: Receiving tube
+    value: managed
+  - label: Leave alone
+    value: unmanaged
+readonly: false
+required: false
+searchable: false
+sort_no: 140
+sortable: false
+type: select

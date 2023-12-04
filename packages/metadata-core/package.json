@@ -1,0 +1,43 @@
+{
+  "name": "@steedos/metadata-core",
+  "version": "2.3.0-beta.19",
+  "description": "",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**",
+    "type_infos/**"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@steedos/client": "2.3.0-beta.19",
+    "archiver": "^5.1.0",
+    "chalk": "^4.1.0",
+    "clone": "^2.1.2",
+    "compressing": "^1.5.1",
+    "dotenv-flow": "^3.2.0",
+    "eval": "^0.1.4",
+    "glob": "^7.1.6",
+    "globby": "^11.1.0",
+    "graceful-fs": "4.2.10",
+    "ini": "^2.0.0",
+    "js-beautify": "^1.13.1",
+    "js-yaml": "^3.14.1",
+    "underscore": "^1.11.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/node": "^14.14.10",
+    "javascript-obfuscator": "^2.9.4",
+    "typescript": "4.6.3"
+  },
+  "author": "",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "80ce49d0436a902175913e8324c5b5c5c1391e4a"
+}

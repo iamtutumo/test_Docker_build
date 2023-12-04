@@ -1,0 +1,34 @@
+_id: apps_pages
+name: Apps
+admin_menus:
+  # - _id: ui
+  #   name: 用户界面
+  #   sort: 450
+  #   permission_sets:
+  #     - admin
+  - _id: user_interface
+    name: User Interface
+    sort: 350
+    permission_sets:
+      - admin
+  - _id: pages
+    name: Mini Pages
+    object_name: pages
+    parent: user_interface
+    sort: 300
+    permission_sets:
+      - admin
+  - _id: tabs
+    name: Tabs
+    object_name: tabs
+    parent: user_interface
+    sort: 500
+    permission_sets:
+      - admin
+  # - _id: word_templates
+  #   name: Word Templates
+  #   permission_sets:
+  #     - admin
+  #   object_name: word_templates
+  #   parent: ui
+  #   sort: 300

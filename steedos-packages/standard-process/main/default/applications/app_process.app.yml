@@ -1,0 +1,11 @@
+_id: app_process
+name: Apps
+code: app_process
+admin_menus:
+  - _id: process
+    name: open process
+    object_name: process
+    parent: process_automation
+    sort: 300
+    permission_sets:
+      - admin

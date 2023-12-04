@@ -1,0 +1,7 @@
+CustomApplications:
+  apps_pages:
+    name: Apps
+    description: null
+CustomLabels:
+  menu_user_interface: 用户界面
+  menu_pages: 微页面

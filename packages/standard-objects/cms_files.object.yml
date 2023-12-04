@@ -1,0 +1,185 @@
+name: cms_files
+label: Attachments
+icon: drafts
+enable_search: true
+enable_api: true
+hidden: false
+version: 2
+fields:
+  name:
+    label: Name
+    type: text
+    searchable: true
+    index: true
+    is_wide: true
+    name: name
+  description:
+    label: Description
+    type: textarea
+    is_wide: true
+    name: description
+  extention:
+    label: Extention
+    type: text
+    disabled: true
+    name: extention
+  size:
+    label: Size
+    type: filesize
+    disabled: true
+    name: size
+  versions:
+    label: History Versions
+    type: file
+    collection: files
+    multiple: true
+    hidden: true
+    name: versions
+  parent:
+    label: Parent
+    type: lookup
+    readonly: true
+    visible_on: "{{global.mode ==='read' ? true : false}}"
+    index: true
+    reference_to: !<tag:yaml.org,2002:js/function> |- 
+      function () {
+                return _.keys(Creator.Objects);
+            }
+    name: parent
+    filterable: true
+list_views:
+  all:
+    columns:
+      - name
+      - size
+      - owner
+      - created
+      - modified
+    extra_columns:
+      - versions
+    order:
+      - - modified
+        - asc
+    filter_scope: space
+permission_set:
+  user:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true
+
+actions:
+  standard_new:
+    label: New
+    visible: false
+  standard_open_view:
+    label: Open
+    visible: true
+  online_preview:
+    label: Preview
+    sort: 110
+    visible: !<tag:yaml.org,2002:js/function> |-
+      function (object_name, record_id, record_permissions, record) {
+              if(!record){
+                return false;
+              }
+              if (Meteor.isCordova){
+                return false;
+              }
+              var file = record;
+              if (Creator.showPreviewButton(file.name) || Creator.isImageAttachment(file.name) || Creator.isHtmlAttachment(file.name))
+                return true;
+              
+              return false;
+            }
+    'on': record
+  standard_edit:
+    label: Edit
+    sort: 0
+    visible: !<tag:yaml.org,2002:js/function> |-
+      function (object_name, record_id, record_permissions, record) {
+        if(record_permissions){
+          return record_permissions["allowEdit"];
+        }
+        else{
+          var object_fields_keys, ref, select;
+          if(!record){
+            object_fields_keys = _.keys(((ref = Creator.getObject(object_name, Session.get("spaceId"))) != null ? ref.fields : void 0) || {}) || [];
+            select = _.intersection(object_fields_keys, ['owner', 'company_id', 'locked']) || [];
+            if (select.length > 0) {
+                record = Creator.getObjectRecord(object_name, record_id, select.join(','));
+            } else {
+                record = {};
+            }
+            record = Creator.getObjectRecord(object_name, record_id, select.join(','));
+          }
+          record_permissions = Creator.getRecordPermissions(object_name, record, Meteor.userId());
+          return record_permissions && record_permissions["allowEdit"];
+        }
+      }
+    'on': record
+    todo: standard_edit
+  standard_delete:
+    label: Delete
+    visible: !<tag:yaml.org,2002:js/function> |-
+      function (object_name, record_id, record_permissions, record) {
+        if(record_permissions){
+          return record_permissions["allowDelete"];
+        }
+        else{
+          var object_fields_keys, ref, select;
+          if(!record){
+            object_fields_keys = _.keys(((ref = Creator.getObject(object_name, Session.get("spaceId"))) != null ? ref.fields : void 0) || {}) || [];
+            select = _.intersection(object_fields_keys, ['owner', 'company_id', 'locked']) || [];
+            if (select.length > 0) {
+                record = Creator.getObjectRecord(object_name, record_id, select.join(','));
+            } else {
+                record = {};
+            }
+            record = Creator.getObjectRecord(object_name, record_id, select.join(','));
+          }
+          record_permissions = Creator.getRecordPermissions(object_name, record, Meteor.userId());
+          return record_permissions && record_permissions["allowDelete"];
+        }
+      }
+    'on': record_more
+    todo: standard_delete
+  download:
+    label: Download
+    'on': record
+  new_version:
+    label: Upgrade
+    visible: !<tag:yaml.org,2002:js/function> |- 
+      function (object_name, record_id, record_permissions, record) {
+        if(record_permissions){
+          return record_permissions["allowEdit"];
+        }
+        else{
+          var object_fields_keys, ref, select;
+          if(!record){
+            object_fields_keys = _.keys(((ref = Creator.getObject(object_name, Session.get("spaceId"))) != null ? ref.fields : void 0) || {}) || [];
+            select = _.intersection(object_fields_keys, ['owner', 'company_id', 'locked']) || [];
+            if (select.length > 0) {
+                record = Creator.getObjectRecord(object_name, record_id, select.join(','));
+            } else {
+                record = {};
+            }
+            record = Creator.getObjectRecord(object_name, record_id, select.join(','));
+          }
+          record_permissions = Creator.getRecordPermissions(object_name, record, Meteor.userId());
+          return record_permissions && record_permissions["allowEdit"];
+        }
+      }
+    is_file: true
+    'on': record_only
+    todo: !<tag:yaml.org,2002:js/function> |- 
+      function (object_name, record_id) {}

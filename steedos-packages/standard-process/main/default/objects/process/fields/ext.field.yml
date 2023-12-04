@@ -1,0 +1,5 @@
+name: ext
+label: The suffix synchronized to metadata
+type: text
+sort_no: 110
+required: true

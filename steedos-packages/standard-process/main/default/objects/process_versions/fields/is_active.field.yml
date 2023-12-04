@@ -1,0 +1,5 @@
+name: is_active
+label: Published
+type: toggle
+sort_no: 40
+readonly: true

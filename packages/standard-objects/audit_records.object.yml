@@ -1,0 +1,66 @@
+name: audit_records
+label: Audit Record
+icon: record
+hidden: true
+version: 2
+fields:
+  related_to:
+    label: "Related Object Record"
+    type: "lookup"
+    index: true
+    reference_to: !<tag:yaml.org,2002:js/function> |- 
+      function () {
+        var o;
+        o = [];
+        _.each(Creator.Objects, function(object, object_name) {
+          if (object.enable_audit) {
+            return o.push(object.name);
+          }
+        });
+        return o;
+      }
+    filterable: true
+  created:
+    label: "时间"
+    filterable: true
+  field_name:
+    label: "Field Name"
+    type: "text"
+    required: true
+    is_wide: true
+    is_name: true
+  created_by:
+    label: "Created by"
+  previous_value:
+    label: "Previous Value"
+    type: "text"
+  new_value:
+    label: "New Value"
+    type: "text"
+list_views:
+  all:
+    label: "All Audit Records"
+    filter_scope: "space"
+    columns: ["related_to", "field_name", "created", "created_by", "previous_value", "new_value"]
+    filter_fields: ["related_to"]
+    sort:
+      - - created
+        - desc
+  recent:
+    label: "Recently Viewed Audit Records"
+    filter_scope: "space"
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: true

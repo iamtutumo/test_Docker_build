@@ -1,0 +1,166 @@
+name: object_actions
+label: Object Action
+icon: actions_and_buttons
+hidden: true
+version: 2
+fields:
+  object:
+    type: master_detail
+    reference_to: objects
+    reference_to_field: name
+    write_requires_master_read: true
+    required: true
+    label: Object
+    create: false
+    sort_no: 110
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function () {
+              var _options;
+
+              _options = [];
+
+              _.forEach(Creator.objectsByName, function (o, k) {
+                return _options.push({
+                  label: o.label,
+                  value: k,
+                  icon: o.icon
+                });
+              });
+
+              return _options;
+            }
+  label:
+    type: text
+    label: Label
+    required: true
+    is_name: true
+    sort_no: 120
+  name:
+    type: text
+    sort_no: 130
+    label: API Name
+    searchable: true
+    index: true
+    required: true
+    inlineHelpText: Can only contain lowercase letters and numbers, must start with a letter, cannot end with an underscore character or contain two consecutive underscore characters
+  is_enable:
+    type: boolean
+    label: Enable
+    sort_no: 140
+  visible:
+    type: boolean
+    omit: true
+    hidden: true
+    label: Visible
+    sort_no: 150
+  'on':
+    type: lookup
+    label: 'On'
+    is_wide: true
+    required: true
+    showIcon: false
+    sort_no: 160
+    optionsFunction: !<tag:yaml.org,2002:js/function> |-
+      function () {
+              return [{
+                label: "显示在列表右上角",
+                value: "list",
+                icon: "contact_list"
+              }, {
+                label: "显示在记录查看页右上角，以及列表视图中每项的下拉菜单中",
+                value: "record",
+                icon: "contact_list"
+              }, {
+                label: "显示在记录查看页右上角的“更多”下拉菜单中，以及列表视图中每项的下拉菜单中",
+                value: "record_more",
+                icon: "action.more"
+              }, {
+                label: "显示在列表视图中每项的下拉菜单中",
+                value: "list_item",
+                icon: "action_list_component"
+              }, {
+                label: "显示在记录查看页右上角",
+                value: "record_only",
+                icon: "contract"
+              }, {
+                label: "显示在记录查看页右上角的“更多”下拉菜单中",
+                value: "record_only_more",
+                icon: "action.more"
+              }];
+            }
+  type: 
+    type: select
+    sort_no: 170
+    options:
+      - label: Custom JavaScript
+        value: script
+      - label: Amis Action
+        value: amis_action
+      # - label: 打印模板(word)
+      #   value: word-print
+    defaultValue: script
+  # word_template:
+  #   type: lookup
+  #   reference_to: word_templates
+  #   visible_on: "{{formData.type === 'word-print' ? true: false}}"
+  #   create: false
+  todo:
+    label: Execute Script
+    sort_no: 180
+    type: code
+    language: javascript
+    required: "{{formData.type != 'amis_action' ? true: false}}"
+    # omit: true
+    # hidden: true
+    is_wide: true
+    visible_on: "{{formData.type != 'amis_action' ? true: false}}"
+  amis_actions: 
+    label: Amis Actions
+    sort_no: 180
+    type: code
+    language: json
+    required: "{{formData.type == 'amis_action' ? true: false}}"
+    is_wide: true
+    visible_on: "{{formData.type == 'amis_action' ? true: false}}"
+  confirm_text:
+    label: 二次确认
+    sort_no: 190
+    type: text
+    required: false
+    is_wide: false
+    visible_on: "{{formData.type == 'amis_action' ? true: false}}"
+  class_name:
+    label: 按钮样式
+    sort_no: 180
+    type: text
+    required: false
+    is_wide: false
+    visible_on: "{{formData.type == 'amis_action' ? true: false}}"
+paging:
+  enabled: false
+list_views:
+  all:
+    columns:
+      - label
+      - name
+      - object
+      - 'on'
+      - is_enable
+      - modified
+    label: All
+    filter_scope: space
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: false
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true

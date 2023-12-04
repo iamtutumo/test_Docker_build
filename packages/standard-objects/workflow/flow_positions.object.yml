@@ -1,0 +1,77 @@
+name: flow_positions
+icon: person_account
+label: Workflow Position
+hidden: true
+version: 2
+fields:
+  role:
+    type: master_detail
+    label: Flow Role
+    reference_to: flow_roles
+    required: true
+    name: role
+    filterable: true
+  users:
+    type: master_detail
+    label: Users
+    reference_to: space_users
+    reference_to_field: user
+    multiple: true
+    required: true
+    name: users
+    filterable: true
+    is_company_limited: false
+  org:
+    type: lookup
+    label: Department
+    reference_to: organizations
+    required: true
+    name: org
+    filterable: true
+  # company_id:
+  #   required: false
+  #   omit: false
+  #   hidden: false
+list_views:
+  all:
+    filter_scope: space
+    columns:
+      - role
+      - org
+      - users
+      - modified
+    filter_fields:
+      - role
+      - users
+      - org
+      - company_id
+    label: All Workflow Positions
+permission_set:
+  user:
+    allowCreate: false
+    allowDelete: false
+    allowEdit: false
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+  admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: true
+    viewAllRecords: true
+  workflow_admin:
+    allowCreate: true
+    allowDelete: true
+    allowEdit: true
+    allowRead: true
+    modifyAllRecords: false
+    viewAllRecords: false
+    modifyCompanyRecords: true
+    viewCompanyRecords: true
+    disabled_list_views: []
+    disabled_actions: []
+    unreadable_fields: []
+    uneditable_fields: []
+    unrelated_objects: []

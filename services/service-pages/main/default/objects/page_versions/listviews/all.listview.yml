@@ -1,0 +1,19 @@
+name: all
+columns:
+  - field: page
+  - field: version
+  - field: is_active
+  - field: description
+  - field: created
+  - field: modified
+  - field: is_system
+filter_scope: space
+filters: []
+label: 所有
+scrolling_mode: standard
+shared: true
+sort_no: 100
+type: grid
+sort:
+  - field_name: 'version'
+    order: desc

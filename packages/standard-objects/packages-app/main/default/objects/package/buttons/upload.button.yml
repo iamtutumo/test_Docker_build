@@ -1,0 +1,5 @@
+name: upload
+is_enable: true
+label: upload
+'on': record_only
+visible: true
